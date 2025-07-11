@@ -121,6 +121,62 @@ Main --> TextbasedUI
 @enduml
 
 ```
+### Activity Diagram
+
+```
+@startuml
+:Book Room;
+:Hiển thị danh sách phòng hiện có;
+if (Danh sách phòng trống?) then (Có)
+  :In thông báo "Không có phòng để đặt.";
+  stop
+else (Không)
+  :In danh sách phòng hiện có;
+  :Yêu cầu nhập số phòng muốn đặt;
+  :Tìm phòng theo số nhập vào;
+  if (Tìm thấy phòng?) then (Có)
+    :Yêu cầu nhập tên khách hàng;
+    :Yêu cầu nhập ngày nhận phòng;
+    :Yêu cầu nhập ngày trả phòng;
+    :Kiểm tra tính khả dụng của phòng;
+    if (Phòng khả dụng?) then (Có)
+      :Đặt phòng thành công;
+      :In thông tin đặt phòng;
+    else (Không)
+      :In thông báo "Đặt phòng thất bại.";
+    endif
+  else (Không)
+    :In thông báo "Không tìm thấy phòng.";
+  endif
+endif
+stop
+@enduml
+```
+
+```
+@startuml
+:Remove Room;
+:Hiển thị danh sách phòng;
+if (Danh sách trống?) then (Yes)
+  :In thông báo "No rooms to remove";
+  stop
+else (No)
+  :In danh sách phòng hiện tại;
+  :Yêu cầu nhập số phòng cần xóa;
+  :Tìm phòng theo số nhập vào;
+  if (Tìm thấy?) then (Yes)
+    :Xóa phòng khỏi danh sách;
+    :In thông báo "Room removed";
+  else (No)
+    :In thông báo "Room not found";
+  endif
+endif
+stop
+@enduml
+```
+
+
+
 
 
 
