@@ -47,55 +47,78 @@ Hotel Room Manager là một công cụ quản lý phòng khách sạn với cá
 
 ## UML
 ```
-+------------------------+
-|     HotelRoomManager   |
-+------------------------+
-| - rooms: List<Room>    |
-| - reservations: List<Reservation> |
-+------------------------+
-| + addRoom(room: Room): void
-| + editRoom(room: Room): void
-| + deleteRoom(room: Room): void
-| + bookRoom(room: Room, customerDetails: String, checkIn: LocalDate, checkOut: LocalDate): Reservation
-| + cancelBooking(reservation: Reservation): void
-| + viewRooms(): List<Room>
-| + getAvailableRooms(checkIn: LocalDate, checkOut: LocalDate): List<Room>
-| + getReservations(): List<Reservation>
-| + searchReservations(customer: String, date: LocalDate): List<Reservation>
-+------------------------+
+@startuml
+class HotelRoomManager {
+    - rooms: List<Room>
+    - reservations: List<Reservation>
+    + addRoom(room: Room): void
+    + deleteRoom(room: Room): void
+    + bookRoom(room: Room, customerDetails: String, checkIn: LocalDate, checkOut: LocalDate): Reservation
+    + cancelBooking(reservation: Reservation): void
+    + viewRooms(): List<Room>
+    + getAvailableRooms(checkIn: LocalDate, checkOut: LocalDate): List<Room>
+    + getReservations(): List<Reservation>
+    + searchReservations(customer: String, date: LocalDate): List<Reservation
+}
 
-          |
-          | manages
-          |
-          v
+class Room {
+    - roomNumber: String
+    - roomType: String
+    - roomStatus: String
+    + getRoomInfo(): String
+    + getRoomNumber(): String
+    + getRoomType(): String
+    + getRoomStatus(): String
+    + setRoomStatus(status: String): void
+}
 
-+------------------------+
-|        Room            |
-+------------------------+
-| - roomNumber: String   |
-| - roomType: String     |
-| - roomStatus: String   |
-+------------------------+
-| + getRoomInfo(): String|
-+------------------------+
+class Reservation {
+    - reservationID: String
+    - room: Room
+    - customerDetails: String
+    - checkInDate: LocalDate
+    - checkOutDate: LocalDate
+    + getReservationDetails(): String
+    + getReservationID(): String
+    + getRoom(): Room
+    + getCustomerDetails(): String
+    + getCheckInDate(): LocalDate
+    + getCheckOutDate(): LocalDate
+}
 
-          ^
-          | used by
-          |
-          v
+class Main {
+    + main(args: String[]): void
+}
 
-+-------------------------------+
-|        Reservation            |
-+-------------------------------+
-| - reservationID: String       |
-| - room: Room                  |
-| - customerDetails: String     |
-| - checkInDate: LocalDate      |
-| - checkOutDate: LocalDate     |
-+-------------------------------+
-| + getReservationDetails(): String |
-+-------------------------------+
-```
+class HotelRoomManagerUI {
+    - manager: HotelRoomManager
+    - roomListModel: DefaultListModel<String>
+    - roomList: JList<String>
+    - outputArea: JTextArea
+    - floorInput: JTextField
+    - bookedCheck: JCheckBox
+    - availableCheck: JCheckBox
+    - singleCheck: JCheckBox
+    - doubleCheck: JCheckBox
+    - filterBtn: JButton
+    + updateRoomList(): void
+    + showRoomDetails(room: Room): void
+    + showRoomOptions(room: Room): void
+    + addRoom(): void
+    + bookRoom(roomToBook: Room): void
+    + removeRoom(roomToRemove: Room): void
+    + showFilterPopup(): void
+}
+
+class TextbasedUI {
+    + main(args: String[]): void
+}
+
+HotelRoomManager "1" *-- "many" Room
+HotelRoomManager "1" *-- "many" Reservation
+Main --> HotelRoomManagerUI
+Main --> TextbasedUI
+@enduml
 
 ---
 
