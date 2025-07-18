@@ -47,5 +47,6 @@ App.java (Main run - has option to choose between 2 UI)
 
 ### Work to do next?
 - Work with file (maybe txt) 
-- editting logic (for all objects)
- 
+- Editting logic (for all objects)
+- Better timeanddate formating (with auto parsching format?) 
+- UI
