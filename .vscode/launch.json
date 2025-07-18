@@ -1,0 +1,72 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Reservationtest",
+            "request": "launch",
+            "mainClass": "test.Reservationtest",
+            "projectName": "HotelM_34466c58"
+        },
+        {
+            "type": "java",
+            "name": "Debug TestRoom",
+            "request": "launch",
+            "mainClass": "test.TestRoom",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug Reservationtest",
+            "request": "launch",
+            "mainClass": "test.Reservationtest",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        }
+    ]
+}
