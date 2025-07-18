@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CRUDTest",
+            "request": "launch",
+            "mainClass": "test.CRUDTest",
+            "projectName": "HotelM_34466c58"
+        },
+        {
+            "type": "java",
             "name": "HotelMTest",
             "request": "launch",
             "mainClass": "test.HotelMTest",
