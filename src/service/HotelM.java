@@ -1,10 +1,9 @@
 package service;
-import model.Customer;
-import model.Reservation;   
-import model.Room;
-
 import java.util.ArrayList;
 import java.util.List;
+import model.Customer;
+import model.Reservation;
+import model.Room;
 
 
 public class HotelM {
@@ -41,13 +40,59 @@ public class HotelM {
         }
         return false; 
     }
-       //later: Update Customers, Reservations
+
+    // Update Customer
+    public boolean updateCustomer(String customerID, String newName, String newEmail, String newPhone) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerID().equals(customerID)) {
+                customer.setName(newName);
+                customer.setEmail(newEmail);
+                customer.setPhoneNumber(newPhone);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Update Reservation
+    public boolean updateReservation(String resID, String newRoomNumber, 
+                                   java.time.LocalDateTime newCheckIn, java.time.LocalDateTime newCheckOut) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getResID().equals(resID)) {
+                // Find the new room
+                Room newRoom = findRoomByNumber(newRoomNumber);
+                if (newRoom != null) {
+                    reservation.setRoom(newRoom);
+                    reservation.setCheckInDate(newCheckIn);
+                    reservation.setCheckOutDate(newCheckOut);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Helper method to find room by number
+    private Room findRoomByNumber(String roomNumber) {
+        for (Room room : rooms) {
+            if (room.getRoomNumber().equals(roomNumber)) {
+                return room;
+            }
+        }
+        return null;
+    }
 
     // Delete methods
     public boolean deleteRoom(String roomNumber) {
         return rooms.removeIf(room -> room.getRoomNumber().equals(roomNumber));
-    }   
+    }
 
-     //later: Delete Customers, Reservations
+    public boolean deleteCustomer(String customerID) {
+        return customers.removeIf(customer -> customer.getCustomerID().equals(customerID));
+    }
+
+    public boolean deleteReservation(String resID) {
+        return reservations.removeIf(reservation -> reservation.getResID().equals(resID));
+    }
 
 }

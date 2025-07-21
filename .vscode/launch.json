@@ -3,6 +3,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AvailableRoomsDisplayTest",
+            "request": "launch",
+            "mainClass": "service.AvailableRoomsDisplayTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "DateParserTest",
+            "request": "launch",
+            "mainClass": "utils.DateParserTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "ReservationParseTest",
+            "request": "launch",
+            "mainClass": "utils.ReservationParseTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "ReservationParseTest",
+            "request": "launch",
+            "mainClass": "model.ReservationParseTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
             "name": "CRUDTest",
             "request": "launch",
             "mainClass": "test.CRUDTest",

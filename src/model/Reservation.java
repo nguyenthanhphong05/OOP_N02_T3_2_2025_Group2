@@ -1,7 +1,6 @@
 package model;
 import java.time.LocalDateTime;
 
-
 public class Reservation {
     private String resID;
     private Room room;
@@ -62,7 +61,4 @@ public class Reservation {
         return "Reservation ID: " + resID + ", Room: " + room.getRoomInfo() + ", Customer: " + customer.getCustomerInfo() +
                ", Check-In: " + checkInDate + ", Check-Out: " + checkOutDate;
     }
-
-
-
 }
