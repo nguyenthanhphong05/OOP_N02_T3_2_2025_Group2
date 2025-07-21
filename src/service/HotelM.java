@@ -30,24 +30,81 @@ public class HotelM {
     public List<Customer> getCustomers() { return customers; }
     public List<Reservation> getReservations() { return reservations; }
 
-    //Update methods
+    // Update methods
     public boolean updateRoom(String roomNumber, String newType, boolean newAvailability) {
         for (Room room : rooms) {
             if (room.getRoomNumber().equals(roomNumber)) {
                 room.setRoomType(newType);
-                room.setAvailable(newAvailability);
+                room.setRoomStatus(newAvailability ? "available" : "booked");
                 return true;
             }
         }
-        return false; 
+        return false;
     }
-       //later: Update Customers, Reservations
+
+    public boolean updateReservation(String reservationID, String newCustomerDetails, LocalDate newCheckIn,
+            LocalDate newCheckOut) {
+        Reservation toUpdate = null;
+
+        // Tìm reservation cần update
+        for (Reservation res : reservations) {
+            if (res.getReservationID().equals(reservationID)) {
+                toUpdate = res;
+                break;
+            }
+        }
+
+        if (toUpdate == null) {
+            return false; // Không tìm thấy
+        }
+
+        // Kiểm tra trùng ngày với các Reservation khác
+        for (Reservation other : reservations) {
+            if (!other.getReservationID().equals(reservationID)
+                    && other.getRoom().getRoomNumber().equals(toUpdate.getRoom().getRoomNumber())) {
+                if (!(newCheckOut.isBefore(other.getCheckInDate()) || newCheckIn.isAfter(other.getCheckOutDate()))) {
+                    return false; // Bị trùng lịch
+                }
+            }
+        }
+
+        // OK -> Update
+        toUpdate.setCustomerDetails(newCustomerDetails);
+        toUpdate.setCheckInDate(newCheckIn);
+        toUpdate.setCheckOutDate(newCheckOut);
+
+        return true;
+    }
+
+    public boolean updateCustomer(String customerID, String newName, String newPhone) {
+        for (Customer cus : customers) {
+            if (cus.getCustomerID().equals(customerID)) {
+                cus.setName(newName);
+                cus.setPhoneNumber(newPhone);
+                return true;
+            }
+        }
+        return false; // Không tìm thấy
+    }
 
     // Delete methods
-    public boolean deleteRoom(String roomNumber) {
-        return rooms.removeIf(room -> room.getRoomNumber().equals(roomNumber));
-    }   
 
-     //later: Delete Customers, Reservations
+    public void deleteRoom(Room room) {
+        rooms.remove(room);
+    }
+
+    public boolean deleteReservation(String reservationID) {
+        return reservations.removeIf(res -> {
+            if (res.getReservationID().equals(reservationID)) {
+                res.getRoom().setRoomStatus("available");
+                return true;
+            }
+            return false;
+        });
+    }
+
+    public boolean deleteCustomer(String customerID) {
+        return customers.removeIf(cus -> cus.getCustomerID().equals(customerID));
+    }
 
 }
