@@ -3,6 +3,7 @@ import model.Customer;
 import model.Reservation;   
 import model.Room;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,17 +32,18 @@ public class HotelM {
     public List<Reservation> getReservations() { return reservations; }
 
     // Update methods
-    public boolean updateRoom(Room roomToUpdate, String newType, String newStatus) {
+      public boolean updateRoom(Room roomToUpdate, String newType, boolean newIsAvailable) { 
         if (rooms.contains(roomToUpdate)) {
             roomToUpdate.setRoomType(newType);
-            roomToUpdate.setRoomStatus(newStatus);
+            roomToUpdate.setAvailable(newIsAvailable);
             return true;
         }
         return false;
     }
 
-    public boolean updateReservation(Reservation reservationToUpdate, Customer newCustomer, Room newRoom, LocalDate newCheckIn, LocalDate newCheckOut) {
+     public boolean updateReservation(Reservation reservationToUpdate, Customer newCustomer, Room newRoom, LocalDateTime newCheckIn, LocalDateTime newCheckOut) {
         if (reservations.contains(reservationToUpdate)) {
+            // Cập nhật các thuộc tính của đối tượng Reservation đã tồn tại
             reservationToUpdate.setCustomer(newCustomer);
             reservationToUpdate.setRoom(newRoom);
             reservationToUpdate.setCheckInDate(newCheckIn);

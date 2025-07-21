@@ -4,11 +4,11 @@ import model.Reservation;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class ReservationSearchService {
+//Phuong thức tìm kiếm các đặt phòng theo các tiêu chí khác nhau như mã khách hàng, tên khách hàng, mã phòng
+public class ReservationSearch {
     private List<Reservation> reservations;
 
-    public ReservationSearchService(List<Reservation> reservations) {
+    public ReservationSearch(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
