@@ -1,11 +1,11 @@
-[Group 2] 
+## [Group 2] 
 Nguyễn Thanh Phong MSV: 24100259
 
 Đặng Đức Kiên MSV: 24100323
 
 # Hotel Management System - 
 
-## 🏨 3 Main Operational Methods (3 Phương thức hoạt động chính)
+## 3 Main Operational Methods (3 Phương thức hoạt động chính)
 
 ### 1. Available Rooms Display (Hiển thị phòng trống)
 **Class:** `AvailableRoomsDisplay.java`
@@ -30,7 +30,7 @@ Nguyễn Thanh Phong MSV: 24100259
 - `getEligibleCheckouts(List<Reservation> reservations)` - Get customers eligible for checkout
 - `checkoutByReservationID(List<Reservation> reservations, String reservationID)` - Individual checkout
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -54,9 +54,11 @@ src/
     └── CRUDTest.java                # CRUD operation tests
 ```
 
+## UML and stuffs
+*uml not found....*
+*mercy pls*
 
-
-## 📋 Models
+## Models
 
 ### Room
 - Room number, type (Deluxe, Standard, Suite, etc.)
@@ -73,6 +75,7 @@ src/
 - Check-in and check-out dates using LocalDateTime
 - Complete reservation information display
 - Date range validation
+
 
 
 ---
