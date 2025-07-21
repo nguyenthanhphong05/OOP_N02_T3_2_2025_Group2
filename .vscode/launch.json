@@ -3,6 +3,7 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "AvailableRoomsDisplayTest",
             "request": "launch",
             "mainClass": "service.AvailableRoomsDisplayTest",
@@ -28,6 +29,12 @@
             "request": "launch",
             "mainClass": "model.ReservationParseTest",
             "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+=======
+            "name": "ReservationSearchTest",
+            "request": "launch",
+            "mainClass": "test.ReservationSearchTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_4a14c824"
+>>>>>>> 7114a6342188ec930d7f0090073dfc75f5b8ef31
         },
         {
             "type": "java",

@@ -24,12 +24,12 @@ public class CRUDTest {
         
         // UPDATE - Change room 102
         System.out.println("\nUPDATE: Changing room 102 to Suite...");
-        hotel.updateRoom("102", "Suite", false);
+        hotel.updateRoom(new Room("102", "Suite", true), "Suite", false);
         System.out.println("Room 102 updated!");
         
         // DELETE - Remove room 102
         System.out.println("\nDELETE: Removing room 102...");
-        hotel.deleteRoom("102");
+        hotel.deleteRoom(new Room("102", "Suite", false));
         System.out.println("Room 102 deleted!");
         
     }

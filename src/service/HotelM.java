@@ -29,16 +29,26 @@ public class HotelM {
     public List<Customer> getCustomers() { return customers; }
     public List<Reservation> getReservations() { return reservations; }
 
-    //Update methods
-    public boolean updateRoom(String roomNumber, String newType, boolean newAvailability) {
-        for (Room room : rooms) {
-            if (room.getRoomNumber().equals(roomNumber)) {
-                room.setRoomType(newType);
-                room.setAvailable(newAvailability);
-                return true;
-            }
+    // Update methods
+      public boolean updateRoom(Room roomToUpdate, String newType, boolean newIsAvailable) { 
+        if (rooms.contains(roomToUpdate)) {
+            roomToUpdate.setRoomType(newType);
+            roomToUpdate.setAvailable(newIsAvailable);
+            return true;
         }
-        return false; 
+        return false;
+    }
+
+     public boolean updateReservation(Reservation reservationToUpdate, Customer newCustomer, Room newRoom, LocalDateTime newCheckIn, LocalDateTime newCheckOut) {
+        if (reservations.contains(reservationToUpdate)) {
+            // Cập nhật các thuộc tính của đối tượng Reservation đã tồn tại
+            reservationToUpdate.setCustomer(newCustomer);
+            reservationToUpdate.setRoom(newRoom);
+            reservationToUpdate.setCheckInDate(newCheckIn);
+            reservationToUpdate.setCheckOutDate(newCheckOut);
+            return true;
+        }
+        return false;
     }
 
     // Update Customer
@@ -95,4 +105,7 @@ public class HotelM {
         return reservations.removeIf(reservation -> reservation.getResID().equals(resID));
     }
 
+    public boolean deleteCustomer(Customer customerToDelete) {
+        return customers.remove(customerToDelete);
+    }
 }
