@@ -31,80 +31,45 @@ public class HotelM {
     public List<Reservation> getReservations() { return reservations; }
 
     // Update methods
-    public boolean updateRoom(String roomNumber, String newType, boolean newAvailability) {
-        for (Room room : rooms) {
-            if (room.getRoomNumber().equals(roomNumber)) {
-                room.setRoomType(newType);
-                room.setRoomStatus(newAvailability ? "available" : "booked");
-                return true;
-            }
+    public boolean updateRoom(Room roomToUpdate, String newType, String newStatus) {
+        if (rooms.contains(roomToUpdate)) {
+            roomToUpdate.setRoomType(newType);
+            roomToUpdate.setRoomStatus(newStatus);
+            return true;
         }
         return false;
     }
 
-    public boolean updateReservation(String reservationID, String newCustomerDetails, LocalDate newCheckIn,
-            LocalDate newCheckOut) {
-        Reservation toUpdate = null;
-
-        // Tìm reservation cần update
-        for (Reservation res : reservations) {
-            if (res.getReservationID().equals(reservationID)) {
-                toUpdate = res;
-                break;
-            }
+    public boolean updateReservation(Reservation reservationToUpdate, Customer newCustomer, Room newRoom, LocalDate newCheckIn, LocalDate newCheckOut) {
+        if (reservations.contains(reservationToUpdate)) {
+            reservationToUpdate.setCustomer(newCustomer);
+            reservationToUpdate.setRoom(newRoom);
+            reservationToUpdate.setCheckInDate(newCheckIn);
+            reservationToUpdate.setCheckOutDate(newCheckOut);
+            return true;
         }
-
-        if (toUpdate == null) {
-            return false; // Không tìm thấy
-        }
-
-        // Kiểm tra trùng ngày với các Reservation khác
-        for (Reservation other : reservations) {
-            if (!other.getReservationID().equals(reservationID)
-                    && other.getRoom().getRoomNumber().equals(toUpdate.getRoom().getRoomNumber())) {
-                if (!(newCheckOut.isBefore(other.getCheckInDate()) || newCheckIn.isAfter(other.getCheckOutDate()))) {
-                    return false; // Bị trùng lịch
-                }
-            }
-        }
-
-        // OK -> Update
-        toUpdate.setCustomerDetails(newCustomerDetails);
-        toUpdate.setCheckInDate(newCheckIn);
-        toUpdate.setCheckOutDate(newCheckOut);
-
-        return true;
+        return false;
     }
 
-    public boolean updateCustomer(String customerID, String newName, String newPhone) {
-        for (Customer cus : customers) {
-            if (cus.getCustomerID().equals(customerID)) {
-                cus.setName(newName);
-                cus.setPhoneNumber(newPhone);
-                return true;
-            }
+    public boolean updateCustomer(Customer customerToUpdate, String newName, String newPhone) {
+        if (customers.contains(customerToUpdate)) {
+            customerToUpdate.setName(newName);
+            customerToUpdate.setPhoneNumber(newPhone);
+            return true;
         }
-        return false; // Không tìm thấy
+        return false;
     }
-
     // Delete methods
 
-    public void deleteRoom(Room room) {
-        rooms.remove(room);
+    public boolean deleteRoom(Room roomToDelete) {
+        return rooms.remove(roomToDelete);
     }
 
-    public boolean deleteReservation(String reservationID) {
-        return reservations.removeIf(res -> {
-            if (res.getReservationID().equals(reservationID)) {
-                res.getRoom().setRoomStatus("available");
-                return true;
-            }
-            return false;
-        });
+    public boolean deleteReservation(Reservation reservationToDelete) {
+        return reservations.remove(reservationToDelete);
     }
 
-    public boolean deleteCustomer(String customerID) {
-        return customers.removeIf(cus -> cus.getCustomerID().equals(customerID));
+    public boolean deleteCustomer(Customer customerToDelete) {
+        return customers.remove(customerToDelete);
     }
-
 }
