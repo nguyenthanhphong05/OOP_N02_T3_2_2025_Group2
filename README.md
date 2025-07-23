@@ -23,12 +23,12 @@ Nguyễn Thanh Phong MSV: 24100259
 - `getActiveReservations(List<Reservation> reservations)` - Get current active reservations
 
 ### 3. Customer Checkout (Checkout khách hàng)
-**Class:** `CustomerCheckout.java`
-**Purpose:** Process customer checkout for the current day
+**Class:** `AutoCheckout.java`
+**Purpose:** Automatically process daily checkouts when checkout time has passed
 **Methods:**
-- `processCheckoutToday(List<Reservation> reservations)` - Process all checkouts for today
-- `getEligibleCheckouts(List<Reservation> reservations)` - Get customers eligible for checkout
-- `checkoutByReservationID(List<Reservation> reservations, String reservationID)` - Individual checkout
+- `processAutoCheckout()` - Automatically checkout expired reservations
+- `getTodaysCheckouts()` - Get all reservations ending today
+- `getDailyOperationsSummary()` - Generate daily operations summary
 
 ## Project Structure
 
@@ -43,7 +43,7 @@ src/
 │   ├── HotelM.java                  # Hotel management CRUD operations
 │   ├── AvailableRoomsDisplay.java   
 │   ├── ReservationSearch.java      
-│   └── CustomerCheckout.java
+│  Autocheckout.java
 ├── utils/DateParser.java            # Auto fixing date format input           
 └── test/                           # Test classes
     ├── TestAvailableRoomsDisplay.java  # Test for Method 1
@@ -61,7 +61,8 @@ src/
 ## Models
 
 ### Room
-- Room number, type (Deluxe, Standard, Suite, etc.)
+- Room number, type (Deluxe, Standard, Suite, etc.) Proc
+- Room pricepPerNight (Int) #new - just added
 - Availability status (boolean)
 - Room information display with formatting
 
@@ -78,5 +79,7 @@ src/
 
 
 
+
 ---
 *everything was logged in "change log folder" check it out 
+

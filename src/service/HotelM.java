@@ -1,4 +1,5 @@
 package service;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
@@ -93,7 +94,7 @@ public class HotelM {
     }
 
     // Delete methods
-    public boolean deleteRoom(String roomNumber) {
+    public boolean deleteRoom(Room roomNumber) {
         return rooms.removeIf(room -> room.getRoomNumber().equals(roomNumber));
     }
 
@@ -108,4 +109,6 @@ public class HotelM {
     public boolean deleteCustomer(Customer customerToDelete) {
         return customers.remove(customerToDelete);
     }
+
+
 }

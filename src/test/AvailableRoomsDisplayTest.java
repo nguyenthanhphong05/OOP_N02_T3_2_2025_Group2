@@ -1,9 +1,12 @@
-package service;
+package test;
 
 import java.time.LocalDateTime;
+
 import model.Customer;
 import model.Reservation;
 import model.Room;
+import service.AvailableRoomsDisplay;
+import service.HotelM;
 
 public class AvailableRoomsDisplayTest {
     public static void main(String[] args) {
