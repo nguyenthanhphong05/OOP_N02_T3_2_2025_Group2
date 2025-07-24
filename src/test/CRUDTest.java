@@ -5,7 +5,7 @@ import model.Room;
 import service.HotelM;
 
 public class CRUDTest {
-    public static void main(String[] args) {
+    public static void testCRUD() {
         System.out.println("Hotel Management System - CRUD Demo\n");
         
         HotelM hotel = new HotelM();
@@ -29,7 +29,7 @@ public class CRUDTest {
         
         // DELETE - Remove room 102
         System.out.println("\nDELETE: Removing room 102...");
-        hotel.deleteRoom(new Room("102", "Suite", false));
+        hotel.deleteRoom("102");
         System.out.println("Room 102 deleted!");
         
     }

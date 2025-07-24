@@ -3,7 +3,7 @@ package test;
 import model.Customer;
 
 public class TestCustomer {
-    public static void main(String[] args) {
+    public static void testCustomer() {
         // Create a Customer object
         Customer customer = new Customer("C001", "John Doe", "john@example.com", "123-456-7890");
 
