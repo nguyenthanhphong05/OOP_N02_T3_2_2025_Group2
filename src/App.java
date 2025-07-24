@@ -1,6 +1,7 @@
 import test.TestAvailableRoomsDisplay;
 import test.TestCustomerCheckout;
-import test.TestReservationSearch;
+import review.TestStudent;
+import test.ReservationSearchTest;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -17,7 +18,7 @@ public class App {
         // Test Method 2: Reservation Search
         System.out.println("2. TESTING RESERVATION SEARCH");
         System.out.println("=============================");
-        TestReservationSearch.main(args);
+        ReservationSearchTest.main(args);
         
         System.out.println("\n\n");
         
@@ -28,5 +29,6 @@ public class App {
         
         System.out.println("\n\n=== ALL TESTS COMPLETED ===");
         System.out.println("Hotel Management System - Practice 5 Completed Successfully!");
+    
     }
 }
