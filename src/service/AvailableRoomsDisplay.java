@@ -1,7 +1,6 @@
 package service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Reservation;
@@ -9,10 +8,9 @@ import model.Room;
 
 /**
  * Method 1: Display available rooms
+ * Phương thức hiển thị phòng trống
  */
 public class AvailableRoomsDisplay {
-    
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     
     /**
      * Get available rooms RIGHT NOW
@@ -64,27 +62,25 @@ public class AvailableRoomsDisplay {
         LocalDateTime now = LocalDateTime.now();
         List<Room> availableRooms = getAvailableRoomsNow(rooms, reservations);
         
-        System.out.println("========================================");
-        System.out.println("AVAILABLE ROOMS RIGHT NOW");
-        System.out.println("Current time: " + now.format(DATE_FORMAT));
-        System.out.println("========================================");
+        System.out.println("🏨 AVAILABLE ROOMS RIGHT NOW");
+        System.out.println("   Phòng trống lúc này: " + now.toLocalDate());
+        System.out.println("═══════════════════════════════════════");
         
         if (availableRooms.isEmpty()) {
-            System.out.println("No rooms available right now");
+            System.out.println("❌ No rooms available right now");
+            System.out.println("   Không có phòng trống lúc này");
             return;
         }
         
-        System.out.println("Found " + availableRooms.size() + " available rooms:");
-        System.out.println("----------------------------------------");
-        System.out.println("Room No.  | Type         | Status");
-        System.out.println("----------------------------------------");
+        System.out.printf("✅ Found %d available rooms:%n", availableRooms.size());
+        System.out.println("─────────────────────────────────────");
         
         for (Room room : availableRooms) {
-            System.out.printf("%-9s | %-12s | Available%n", 
+            System.out.printf("🚪 Room %-8s | %-12s | Available%n", 
                             room.getRoomNumber(), 
                             room.getRoomType());
         }
         
-        System.out.println("========================================");
+        System.out.println("═══════════════════════════════════════");
     }
 }
