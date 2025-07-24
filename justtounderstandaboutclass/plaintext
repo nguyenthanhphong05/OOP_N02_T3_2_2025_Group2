@@ -1,0 +1,692 @@
+Object-Oriented 
+Programming
+ CSE703029
+ Slides adapted from Steven Roehrig
+ Additional and Modified Material by PhD. Le Thu Nguyen  
+thu.nguyenle1@phenikaa-uni.edu.vn
+ Nguyen.le-thu.PhD@ieee.org
+ School of Computing
+ Phenikaa University
+ @nglthu
+ Lecture 6: Interfaces and Inner Classes
+ 
+Today’s Topics 
+(Nội dung)
+ □ Interfaces: the ultimate in abstract classes
+ □ 100%trừutượng
+ □ Simulating multiple inheritance
+ □ Minh họa nhiều Kế thừa
+ □ “Stupid interface tricks”
+ □ Inner classes: named, anonymous, and static
+ □ Lớpcon: tên, không tên, tĩnh
+ □ The “callback” idea (gọi lại)
+ □ Control frameworks (Khung điều khiển_
+Interfaces 
+Giao diện
+ □ An interface is a “pure” abstract class.
+ □ 100%trừu tượng
+ □ The intent of an interface is to specify a set of methods 
+that a concrete class will honor.
+ □ Bộphươngthức của Interface được thực thi bởi Class.
+ □ Class inherits interface is to implement interface.
+ □ Class kế thừa Interface thực thi phương thức trong
+ Interface
+Interfaces 
+Giao diện
+ □ New class can implement several interfaces.
+ □ Lớpcóthểthực thi nhiều Interfaces
+ □ Interfaces have no data members (except static final) or 
+no method bodies.
+ □ Interface không có biến thành viên, không có phần thân
+ chương trình. 
+Some Java Interfaces
+ Giao diện của Java
+ EventListener
+ ■ Methods: none
+ ActionListener extends EventListener
+ ■ Methods: ActionPerformed()
+ Adjustable (java.awt.Adjustable)
+ ■ Methods: get/setMaximum/Minimum(), 
+getValue(), etc.
+ CharacterIterator
+ ■ Methods: first(), last(), next()
+Technical details
+ Miêu tả
+ Use the interface keyword (từ
+ khóa). 
+interface Animal{
+ public void animalSound();
+ An interface usually sits in its own 
+.java file (Riêng một file .java).
+ Use public or nothing (making it 
+friendly).
+ private and protected aren’t allowed. 
+(no inheritance)
+ To implement, use a class with a 
+keyword of implements
+ Class sử dung từ khóa implements 
+để thực thi phần phương thức cho
+ Interface
+ Interface methods are always 
+}
+ class Dog implements Animal {
+ public void animalSound(){
+ System.out.println(“Dog is barking”);}
+ }
+ public (để sử dung).
+Node as an Interface
+ public interface Node {
+ void setChild(int position, Node n);
+ double eval();
+ String toString();
+ }
+ □ Note there is no constructor given.
+ □ Khôngcóconstructor
+ □ The abstract keyword isn’t used for the 
+methods.
+ □ The methods are automatically public.
+Abstract class
+ ❏ Special type of Class, can not instantiate
+ Animal obj X new Animal();
+ Animal is abstract class
+ Không có thể hiện obj với Abstract class
+ ❏ Type of Objects
+ ❏ At least One pure virtual function (function without 
+implementation)
+ public void animalSound();
+Binop Can Still be Abstract
+ public abstract class Binop implements Node {
+ protected Node lChild, rChild;
+ public Binop() {}
+ public Binop(Node l, Node r) {
+ lChild = l; rChild = r;
+ }
+ //Abstract class can have abstract and concrete methods
+ //concrete method
+ public void setChild(int position, Node n) {
+ if (position == 1)
+ lChild = n;
+ else
+ rChild = n;
+ }
+ }
+Abstract Class
+ 1 Type (Kiểu) of Objects
+ 2 Access modifiers: Public, 
+Protected, and Private
+ 3 A Class can inherit from One (01)  
+Abstract Class
+ 4 Have Abstract and Concrete 
+Methods (<100% trừu tượng)
+ 5 Can implement Interface
+ (Abstract class thực thi Inteface)
+ 6 Keywords: Extends
+ 7 Extend (01) another class and 
+implement multiple (nhiều) 
+interfaces
+ Interface
+ (Bộ hành vi) Set of behaviours
+ (truy cập) Public
+ A Class can implement multiple (nhiều) 
+interfaces
+ Only Abstract Methods (100% trừu
+ tượng)
+ Can NOT implement Abstract Class 
+(Interface Không thực thi Abstract class)
+ (từ khóa) implements
+ Can extend multiple (nhiều) interfaces
+Make Binop an Interface?
+ Tạo Binop là Interface
+ □ Binop currently has the implementation of 
+setChild().
+ □ We would have to place copies of this code in 
+all the classes that implemented Binop.
+ □ This is probably unwise (“inelegant and error
+prone”).
+ □ Note that Node is still a type, so we use it just 
+as before.
+Java’s Comparable Interface
+ public class Student implements Comparable {
+ public Student(String name, float gpa) {
+ this.name = name;
+ this.gpa = gpa;
+ }
+ public Student() {}
+ //Object is the ancestor of every class
+ public int compareTo(Object o) {
+ //cast the correct type (Student)o
+ if ( ((Student)o).gpa < gpa )     return 1;
+ else if ( ((Student)o).gpa > gpa )    return -1;
+ else   return 0;
+ }
+Class Student (tiếp.)
+ // Can this equals() be improved and be consistent??
+ public boolean equals(Object o) {
+ //cast the correct type (Student)o
+ if (gpa == ((Student) o).gpa)  return true;
+ else return false;
+ }
+ public String getName() { return name;}
+ public float getGpa() { return gpa;}
+ private String name;
+ private float gpa;
+ }
+Using Class Student
+ public class TestStudent {
+ public static void main(String[] args) {
+ Student s1 = new Student("Fred", 3.0F);
+ Student s2 = new Student("Sam", 3.5F);
+ Student s3 = new Student("Steve", 2.1F);
+ if (s3.compareTo((Object)s2) < 0)
+ System.out.println(s3.getName() + " has a lower gpa than " + s2.getName());
+ //Set is an interface in Java ; TreeSet is its implementation
+ Set studentSet = new TreeSet();
+ //Method of set add(element)
+ studentSet.add(s1); studentSet.add(s2); studentSet.add(s3);
+ //Iterator interface access elements of Map, List, Set
+ Iterator i = studentSet.iterator();
+ //method of Iterator hasNext()
+ while(i.hasNext()) System.out.println( ((Student)i.next()).getName());
+ }
+ }
+
+Interface and its implementation: 
+Style of writing code in Java (Kiểu viết)
+ Left (trái) : Declaring a variable the generic set 
+interface. Miêu tả biến giao diện Set
+ Right (Phải): Specific 
+implementation. Phần thực thi
+ Set studentSet = new TreeSet();
+Comparable và TreeSet
+ □ The Comparable interface specifies a single 
+method (phương thức), compareTo(Object).
+ □ It should be “consistent with equals()”, so I 
+defined equals() accordingly. But was my 
+equals() enough? No, see the notes for the last 
+lecture!
+ □ Since Student implements Comparable, a 
+“container class” (lớp kế thừa) like TreeSet
+ biết thứ tự sử dụng knows how to use them 
+(it stores them in order).
+Other Interface Issues
+ Vấn đề khác
+ □ You can inherit from an interface to create a 
+new interface. 
+□ Kếthừa từ 01 Interface để tạo một Interface 
+mới
+ □ A single class can implement several 
+interfaces simultaneously (Java’s version of 
+multiple inheritance).
+ □ Mộtlớpcó thể hoành thiện nhiều Interfaces
+Other Interface Issues
+ Vấn đề khác
+ □ This is OK, since interfaces have no data or 
+method code that could conflict.
+ □ Interface không có dữ liệu hoặc phần thực thi
+ của phương thức.
+ □ You must watch out for method name clashes, 
+though.
+Name Collision
+ Xung đột tên
+ interface I1 { void f(); }
+ interface I2 { int f(int i); }
+ interface I3 { int f(); }
+ class C { public int f() { return 1; } }
+ class C2 implements I1, I2 {
+ public void f() {}
+ public int f(int i) { return 1; } //overloaded
+ }
+ class C3 extends C implements I2 {
+ public int f(int i) { return 1; } //overloaded
+ }
+ class C4 extends C implements I3 {
+ // identical, no problem
+ public int f() { return 1; }
+ }
+ public class Collision extends C implements I1 {
+ }
+ f() in C cannot implement 
+f() in I1; attempting to use 
+incompatible return type
+Inner Classes
+ Lớp trong
+ □ It’s possible (and sometimes encouraged!) to 
+define one class within another.
+ □ Lớptrong lớp
+ □ This provides another way to group classes 
+that work closely together.
+ □ Nhómcáclớp làm việc cùng nhau
+Inner Classes
+ Lớp trong
+ □ Inner classes can be “shielded” so that they 
+are unknown to the outside world.
+ □ Lớptrong có thể được che đậy, và bên ngoài
+ không biết đến các lớp trong này
+ □ Often inner classes are used to hide a class
+specific implementation of an external 
+interface.
+ □ Thường dùng để ẩn các thực thi đặc biệt cho
+ giao diện bên ngoài.
+A Primitive Iterator
+ Lặp cơ bản
+ public interface Selector {
+ boolean end();
+ Object current();
+ void next();
+ }
+ □ This provides a way to access elements in 
+“container classes.”
+ □ Truy cập với các thành phần của lớp kế thừa
+ □ If everyone uses the same interface, new 
+container class types are interchangeable 
+(hoán đổi).
+A Primitive Container Class
+ Lớp kế thừa cơ bản
+ public class Sequence {
+ private Object[] objects; //array of Object
+ private int next = 0;
+ public Sequence(int size) { objects = new Object[size];}
+ public void add(Object x) { //x dont have length
+ if (next < objects.length) { objects[next] = x;  next++} }
+ //inner class SSelector of Sequence
+ private class SSelector implements Selector {
+ //Selector is an interface
+ int i = 0;
+ public boolean end() {return i == objects.length }
+ public Object current() { return objects[i]; }
+ public void next() {if (i < objects.length) i++;}}
+ public Selector getSelector() {  
+return new SSelector();}
+ }
+ }
+Testing(Kiểm thử)
+ the Sequence Class
+ public class TestSequence {
+ public static void main(String[] args) {
+ Sequence s = new Sequence(10);
+ for (int i = 0; i < 10; i++)
+ s.add(Integer.toString(i));
+ //selector is interface
+ Selector sl = s.getSelector();
+ while(!sl.end()) {
+ System.out.println(sl.current());
+ sl.next();
+ }
+ }
+ }
+Inner Class
+ //Outerclass
+ public class OuterClassTest {
+ int var1 ;
+ public class InnerClassTest {
+ public void InnerClassTest(){System.out.println(“var1”+this.var1)}
+ }
+ }
+ //Main
+ public static void main(String[] args) {
+ OuterClassTest oct= new OuterClassTest();
+ OuterClassTest.InnerClassTest ict = oct.new InnerClassTest();
+ System.out.println(ict);
+ }
+ }
+Sequence and Selector
+ □ This is quite similar to Java’s use of Iterator (lặp)
+ □ The inner class can 
+■ access the outer class (e.g., get at the array) (truy cập lớp
+ ngoài), 
+■ implement a public interface (thực thi Interface), and
+ ■ remain private (duy trì riêng tư), and specialised (che đậy).
+ □ We might write a tree-based container, using the same 
+Selector interface.
+ □ It would be easy for clients to switch between the two, 
+if necessary for performance reasons.
+Sequence and 
+Selector (tiếp.)
+ □ Sequence is pretty primitive, eh?
+ □ How would you improve it to
+ ■ be more type-specific?
+ ■ handle overflow more gracefully?
+ ■ access specific elements directly?
+Inner Classes
+ □ Look again at SSelector, for example the line return 
+objects[i]; in the method current().
+ □ How does the SSelector object know which 
+Sequence object it “belongs to”?
+ □ It holds a reference (tham chiếu) to the object that 
+created it.  The compiler takes care of these details.
+ □ You can get this reference (tham chiếu) by saying 
+outerClass.this
+ □ You can’t create an inner class object unless you 
+have an outer class object to start with (chỉ có thể
+ hiện lớp trong sau khi đã có lớp ngoài), unless…
+Static Inner Classes
+ □ You don’t need an object of the outer class 
+type to create an object of a static inner class 
+type (giống static trong Class).
+ □ Of course you can’t access an outer class 
+object with a static inner class type (there is 
+no this).
+ □ A bottle of Rolling Rock to the first person 
+providing a convincing example of where 
+you’d want to do this!
+Anonymous (nặc danh) 
+Inner Classes
+ □ If we never need to invoke the name of an 
+inner class type, we can make the inner class 
+anonymous.
+ □ Khôngbao giờ gọi tên lớp con, sử dung 
+nặc(không) danh
+ □ This is a common idiom in Java, but 
+somewhat confusing.
+ □ It is much used, for example, in GUI 
+programming with Swing listener classes.
+Anonymous Selector Subclass
+ public class Sequence {
+ :
+ public Selector getSelector() {
+ return new Selector() {
+ int i = 0;
+ public boolean end() {
+ return i == objects.length;
+ }
+ public Object current() {
+ return objects[i];
+ }
+ public void next() {
+ if (i < objects.length) i++;
+ }
+ };
+ }
+ This replaces the explicit
+ definition of SSelector,
+ whose name we never used.
+ Selector is an interface, but
+ this idea works with concrete
+ classes too.
+ SSelector is innerClass
+ Skip the name to
+ Anonymous innerClass
+ }
+Random Facts on Inner Classes
+ □ .class files are created, using the convention 
+OuterClassName$InnerClassName.class
+ □ Anonymous inner classes are in files like 
+OuterClassName$1
+ □ You can nest (lồng) inner classes indefinitely, 
+but things quickly become confusing.
+ □ You can have multiple (nhiều) inner classes 
+implementing different interfaces.
+Simple Callback Mechanism
+ Cơ chế gọi lại
+ interface Incrementable {
+ void increment();
+ }
+ public class Callee implements Incrementable {
+ private int i = 0;
+ public void increment() {
+ i ++;
+ System.out.println("Callee increments i to " + i);
+ }
+ }
+Simple Callback (cont.)
+ public class Caller {
+ private Incrementable callbackReference;
+ Caller(Incrementable cbr) {
+ callbackReference = cbr;
+ }
+ void go() {
+ callbackReference.increment(); //gọi lại
+ }
+ }
+ public class TestCallback {
+ public static void main(String[] args) {
+ Callee callee = new Callee();
+ Caller caller = new Caller(callee);
+ caller.go();
+ }
+ }
+Callbacks: Gọi lại
+ □ Suppose we want to implement Incrementable, 
+yet derive from MyIncrement:
+ interface Incrementable {
+ void increment();
+ }
+ public class MyIncrement {
+ public void increment() {
+ System.out.println("MyIncrement increment operation");
+ }
+ }
+A Callee Can “Leave a Message”
+ public class Callee extends MyIncrement {
+ private int i = 0;
+ private void incr() {
+ i++;
+ System.out.println("Callee i incremented to " + i);
+ }
+ private class Closure implements Incrementable {
+ public void increment() { incr(); }
+ }
+ Incrementable getCallbackReference() {
+ return new Closure();
+ }
+ }
+A Caller Can “Call Back”
+ public class Caller {
+ private Incrementable callbackReference;
+ Caller(Incrementable cbr) {
+ callbackReference = cbr;
+ }
+ void go() {
+ callbackReference.increment();
+ }
+ }
+It Works Like This
+ public class TestCallbacks {
+ public static void main(String[] args) {
+ Callee c = new Callee();
+ c.increment();
+ Caller caller = new Caller(c.getCallbackReference());
+ caller.go();
+ caller.go();
+ }
+ }
+Event-Driven Systems
+ Sự kiện
+ □ Normally we write code with a specific 
+sequence of message passing in mind.
+ □ Sometimes, though, the “outside world” has 
+to determine the sequence of events (chuỗi sự
+ kiện):
+ ■ responding to server hits (đáp từ server)
+ ■ responding to external sensors (đáp từ sensor bên
+ ngoài)
+ ■ responding to UI activities (đáp từ giao diện
+ người dùng)
+Event-Driven Systems 
+(Eckel’s)
+ □ Eckel’s simulation of an event-driven system 
+illustrates this.
+ □ There is an Event interface (giao diện Event)
+ ■ a time to “fire” (thời điểm đốt cháy sự kiện J)
+ ■ a constructor
+ ■ a ready() method to see if the Event should “fire” 
+(phương thức sẵn sàng khi sự kiện có tác dung)
+ ■ an action() method performing the event’s 
+responsibility (thực thi hành động)
+ ■ a description() method 
+The Event Class
+ Lớp Event
+ public abstract class Event {
+ private long eventTime; // the time for this event to “fire”
+ public Event(long evtTime) {
+ eventTime = evtTime;
+ }
+ public boolean ready() { // is it time to “fire” yet?
+ return System.currentTimeMillis() >= eventTime;
+ }
+ abstract public void action();
+ // what to do when I “fire”
+ abstract public String description();
+ }
+The EventSet Class
+ Lớp EventSet
+ □ This holds an array of objects (pending Events), 
+named events[].
+ Event  events[] = new Event[100]
+ □ events[] elements refer to either an actual pending 
+Event, or to null.
+ □ The getNext() method looks for a non-null Event in 
+events[], and returns it if there is one. 
+□ It returns null if there are no more events to process 
+(Không có sự kiện cần xử lý).  
+□ This is quite realistic in a GUI-based program (giao
+ diện người dùng).
+The Class EventSet
+ Lớp EventSet
+ public class EventSet {
+ private Event[] events = new Event[100];
+ private int index = 0;
+ // index for inserting
+ private int next = 0;
+ // next place to look
+ public void add(Event e) {
+ if (index >= events.length)
+ return;  
+// Event e isn’t added! Bad!
+ events[index++] = e;
+ }
+ public void removeCurrent() {
+ events[next] = null;
+ // mark for garbage collection
+ }
+EventSet Structure
+ Cấu trúc EventSet
+ event[0]
+ index
+ event[99]
+ EventTime 
+=
+ 47470
+ EventTime 
+=
+ 28800
+ null
+ …
+ null
+EventSet’s getNext() Method
+ // return the next pending Event, or null if no more Events 
+public Event getNext() {
+ boolean looped = false;
+ int start = next;
+ do {
+ // look for a non-null
+ next = (next + 1) % events.length;
+ if (start == next)
+ looped = true;
+ if ((next == (start + 1) % events.length) && looped)
+ return null;
+ } while(events[next] == null);
+ return events[next];
+ }
+Now The Controller Class
+ Lớp Controller
+ public class Controller {
+ private EventSet es = new EventSet();
+ public void addEvent(Event c) { es.add(c); }
+ public void run() {
+ Event e;
+ while ((e = es.getNext()) != null) {
+ if (e.ready()) {
+ e.action();
+ System.out.println(e.description());
+ es.removeCurrent();
+ }
+ }
+ }
+ }
+Some Event Subclasses
+ Lớp con của Event: StartStudying
+ private class StartStudying extends Event {
+ public StartStudying(long eventTime) {
+ super(eventTime);
+ }
+ public void action() {
+ studying = true;
+ }
+ public String description() {
+ return "Can't you see I'm studying Java?";
+ }
+ }
+Some Event Subclasses
+ Lớp con Event: StopStudying
+ private class StopStudying extends Event {
+ public StopStudying(long eventTime) {
+ super(eventTime);
+ }
+ public void action() {
+ studying = false;
+ }
+ public String description() {
+ return "I'm sick of studying Java!";
+ }
+ }
+Some Event Subclasses
+ Lớp con Event: StartSleeping
+ private class StartSleeping extends Event {
+ public StartSleeping(long eventTime) {
+ super(eventTime);
+ }
+ public void action() {
+ sleeping = true;
+ }
+ public String description() {
+ return "Buzz off, I'm sleeping!";
+ }
+ }
+Some Event Subclasses
+ Lớp con Event: StopSleeping
+ private class StopSleeping extends Event {
+ public StopSleeping(long eventTime) {
+ super(eventTime);
+ }
+ public void action() {
+ sleeping = false;
+ }
+ public String description() {
+ return "I'm awake now, think I'll study Java.";
+ }
+ }
+“Bootstrap” Some Events
+ Khởi động Sự kiện
+ private class AnotherWeekAtCMU extends Event {
+ public AnotherWeekAtCMU(long eventTime) {
+ super(eventTime);
+ }
+ public void action() {
+ //add event in Controller
+ long tm = System.currentTimeMillis();
+ addEvent(new StartSleeping(tm));
+ // Sunday at midnight
+ addEvent(new StopSleeping(tm + 28800)); // Monday at 8 am
+ addEvent(new StartStudying(tm + 28801));
+ addEvent(new StartEating(tm + 28860));
+ }
+ public String description() {
+ return "Starting another week at CMU";
+ }
+ }
+Pull It All Together
+ Kết hợp tất cả thành bài tập lớn
+ public class LifeAtCMUControls extends Controller {
+ private boolean studying = false;
+ private boolean sleeping = false;
+ private boolean eating = false;
+ private boolean playing = false; // Jeez, what a life!
+ // All the previous classes go in here
+ public static void main(String[] args) {
+ LifeAtCMUControls life = new LifeAtCMUControls();
+ long tm = System.currentTimeMillis();
+ life.addEvent(life.new AnotherWeekAtCMU(tm));
+ life.run();
+ }
+ }

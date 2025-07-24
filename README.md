@@ -5,8 +5,6 @@ Nguyễn Thanh Phong MSV: 24100259
 
 # Hotel Management System - 
 
-## 3 Main Operational Methods (3 Phương thức hoạt động chính)
-
 ### 1. Available Rooms Display (Hiển thị phòng trống)
 **Class:** `AvailableRoomsDisplay.java`
 **Purpose:** Display available rooms for the current date and filter by room type
@@ -46,12 +44,7 @@ src/
 │  Autocheckout.java
 ├── utils/DateParser.java            # Auto fixing date format input           
 └── test/                           # Test classes
-    ├── TestAvailableRoomsDisplay.java  # Test for Method 1
-    ├── TestReservationSearch.java     # Test for Method 2
-    ├── TestCustomerCheckout.java      # Test for Method 3
-    ├── TestRoom.java                  # Room entity tests
-    ├── TestCustomer.java             # Customer entity tests
-    └── CRUDTest.java                # CRUD operation tests
+
 ```
 
 ## UML and stuffs
@@ -78,8 +71,10 @@ src/
 - Date range validation
 
 
-
+### To Do Next?
+- Adding Abstract class and interface to the project
 
 ---
 *everything was logged in "change log folder" check it out 
+
 
