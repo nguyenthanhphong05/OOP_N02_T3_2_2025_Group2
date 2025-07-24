@@ -6,7 +6,7 @@ import model.Reservation;
 import java.time.LocalDateTime;
 
 public class Reservationtest {
-    public static void main(String[] args) {
+    public static void testReservation() {
         // Create a Room object
         Room room = new Room("101", "Deluxe", true);
 

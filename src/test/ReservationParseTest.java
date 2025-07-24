@@ -1,6 +1,8 @@
-package model;
+package test;
 
 import java.time.LocalDateTime;
+
+import model.Reservation;
 
 public class ReservationParseTest {
     public static void main(String[] args) {

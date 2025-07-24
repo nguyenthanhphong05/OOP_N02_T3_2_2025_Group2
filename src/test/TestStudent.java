@@ -1,10 +1,12 @@
-package review;
+package test;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import review.Student;
+
 public class TestStudent {
-    public static void main(String[] args) {
+    public static void testStudent() {
         System.out.println("Testing Student class with Comparable interface\n");
         
         // Create some Student objects
