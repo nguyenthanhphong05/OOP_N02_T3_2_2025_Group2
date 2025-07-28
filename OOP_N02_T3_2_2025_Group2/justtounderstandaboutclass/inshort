@@ -1,0 +1,23 @@
+so in short, today's lecture is about -
+
+## Abstract class - ("What you are!")
+         just an uncompleted class - *so it can not be called directly*
+         It served as a blueprint/template (Parent class)
+         
+*        A regular class STILL can be extended 
+-        And sometimes it can cause conflict. (IDK man, not yet experienced)
+
+*        A child class can ONLY Extend an abs class because:
+          "You can not build a house with 2 different blueprint" or
+          "There is only 1 PARENT for a child - biologically"
+          
+            
+## Interface - ("What you can!") 
+        Just a collection of methods that dont have their body (and thats why it is good) 
+        can be implemented (added) into any classes
+        it served like a plugin architecutre - so you can add features without changing the core code ? 
+        
+*       "A house can only be built with a blueprint, but it has it's right to have a bed - a table - a chair - whatever - these is no conflict"
+
+P
+

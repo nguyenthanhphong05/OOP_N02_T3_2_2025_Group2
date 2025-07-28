@@ -1,0 +1,121 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+<<<<<<< HEAD
+            "name": "AvailableRoomsDisplayTest",
+            "request": "launch",
+            "mainClass": "service.AvailableRoomsDisplayTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "DateParserTest",
+            "request": "launch",
+            "mainClass": "utils.DateParserTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "ReservationParseTest",
+            "request": "launch",
+            "mainClass": "utils.ReservationParseTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+        },
+        {
+            "type": "java",
+            "name": "ReservationParseTest",
+            "request": "launch",
+            "mainClass": "model.ReservationParseTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_955712b1"
+=======
+            "name": "ReservationSearchTest",
+            "request": "launch",
+            "mainClass": "test.ReservationSearchTest",
+            "projectName": "OOP_N02_T3_2_2025_Group2_4a14c824"
+>>>>>>> 7114a6342188ec930d7f0090073dfc75f5b8ef31
+        },
+        {
+            "type": "java",
+            "name": "CRUDTest",
+            "request": "launch",
+            "mainClass": "test.CRUDTest",
+            "projectName": "HotelM_34466c58"
+        },
+        {
+            "type": "java",
+            "name": "HotelMTest",
+            "request": "launch",
+            "mainClass": "test.HotelMTest",
+            "projectName": "HotelM_34466c58"
+        },
+        {
+            "type": "java",
+            "name": "Reservationtest",
+            "request": "launch",
+            "mainClass": "test.Reservationtest",
+            "projectName": "HotelM_34466c58"
+        },
+        {
+            "type": "java",
+            "name": "Debug TestRoom",
+            "request": "launch",
+            "mainClass": "test.TestRoom",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug Reservationtest",
+            "request": "launch",
+            "mainClass": "test.Reservationtest",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "HotelM",
+            "classPaths": [
+                "${workspaceFolder}/bin"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src"
+            ],
+            "args": [],
+            "console": "integratedTerminal"
+        }
+    ]
+}
