@@ -6,6 +6,12 @@ public class Room {
     private int pricePerNight;
     private boolean isAvailable;
    
+    // Default constructor for Spring form binding
+    public Room() {
+        this.pricePerNight = 100;
+        this.isAvailable = true;
+    }
+
     // Constructor with 3 parameters (without price for backward compatibility)
     public Room(String roomNumber, String roomType, boolean isAvailable) {
         this.roomNumber = roomNumber;
