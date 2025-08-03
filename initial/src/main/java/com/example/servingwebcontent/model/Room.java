@@ -1,9 +1,21 @@
 package com.example.servingwebcontent.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "rooms")
 public class Room {
+    @Id
+    @Column(name = "room_number", unique = true, nullable = false)
     private String roomNumber;
+    
+    @Column(name = "room_type", nullable = false)
     private String roomType;
+    
+    @Column(name = "price_per_night", nullable = false)
     private int pricePerNight;
+    
+    @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
    
     // Default constructor for Spring form binding

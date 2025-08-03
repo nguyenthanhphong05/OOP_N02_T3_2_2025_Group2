@@ -1,0 +1,7 @@
+Room Number,Room Type,Price Per Night,Is Available
+102,Double,120,true
+201,Suite,200,false
+202,Single,80,true
+101,Single,80,true
+121,Single,100,true
+111,Single,100,true

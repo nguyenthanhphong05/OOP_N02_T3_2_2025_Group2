@@ -66,6 +66,15 @@
                             </div>
                         </div>
 
+                        <div class="row mt-3" th:if="${fileContent}">
+                            <div class="col-12">
+                                <h5>File Content:</h5>
+                                <div class="alert alert-light">
+                                    <pre th:text="${fileContent}"></pre>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row mt-3">
                             <div class="col-12">
                                 <div class="btn-group" role="group">

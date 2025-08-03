@@ -25,7 +25,27 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Room Management</h2>
-            <a href="/rooms/new" class="btn btn-primary">Add New Room</a>
+            <div>
+                <a href="/rooms/export" class="btn btn-success me-2">Save</a>
+                <a href="/rooms/backup" class="btn btn-warning me-2">Backup Database</a>
+                <a href="/rooms/new" class="btn btn-primary">Add New Room</a>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <div class="alert alert-info">
+                    <strong>File Operations:</strong> Room data is automatically saved to individual files and can be exported to CSV format.
+                    Database backup creates a copy of all room data.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form th:action="@{/rooms/import}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-primary btn-sm" onclick="return confirm('This will import rooms from CSV. Continue?')">
+                        Import from CSV
+                    </button>
+                </form>
+            </div>
         </div>
 
         <div class="card">
