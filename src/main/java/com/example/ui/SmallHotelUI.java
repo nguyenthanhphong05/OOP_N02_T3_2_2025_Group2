@@ -1,15 +1,15 @@
-package ui;
+package com.example.ui;
 
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.*;
-import model.Customer;
-import model.Reservation;
-import model.Room;
-import service.AutoCheckout;
-import service.AvailableRoomsDisplay;
-import service.HotelM;
+import com.example.model.Customer;
+import com.example.model.Reservation;
+import com.example.model.Room;
+import com.example.service.AutoCheckout;
+import com.example.service.AvailableRoomsDisplay;
+import com.example.service.HotelM;
 
 public class SmallHotelUI extends JFrame {
     private HotelM hotel;

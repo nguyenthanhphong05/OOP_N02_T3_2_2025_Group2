@@ -1,6 +1,6 @@
-package service;
+package com.example.service;
 
-import model.Reservation;
+import com.example.model.Reservation;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,10 +1,10 @@
-package service;
+package com.example.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.Reservation;
-import model.Room;
+import com.example.model.Reservation;
+import com.example.model.Room;
 
 /**
  * Method 1: Display available rooms

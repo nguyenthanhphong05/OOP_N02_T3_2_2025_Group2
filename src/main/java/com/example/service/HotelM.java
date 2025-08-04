@@ -1,11 +1,10 @@
-package service;
+package com.example.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.Customer;
-import model.Reservation;
-import model.Room;
-import java.time.LocalDateTime;
+import com.example.model.Customer;
+import com.example.model.Reservation;
+import com.example.model.Room;
 
 
 public class HotelM {
