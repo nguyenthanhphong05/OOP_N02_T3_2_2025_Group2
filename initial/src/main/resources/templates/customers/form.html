@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${isEdit} ? 'Edit Customer' : 'Add New Customer'">Customer Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/hotel-theme.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .required-field::after {
+            content: " *";
+            color: var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-building"></i> Hotel Management
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="/rooms">
+                        <i class="fas fa-bed"></i> Rooms
+                    </a>
+                    <a class="nav-link active" href="/customers">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-primary text-center">
+                    <i th:class="${isEdit} ? 'fas fa-edit' : 'fas fa-user-plus'"></i>
+                    <span th:text="${isEdit} ? 'Edit Customer' : 'Add New Customer'">Customer Form</span>
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/rooms">Hotel Management</a></li>
+                        <li class="breadcrumb-item"><a href="/customers">Customer Management</a></li>
+                        <li class="breadcrumb-item active" th:text="${isEdit} ? 'Edit Customer' : 'Add Customer'">Form</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i th:class="${isEdit} ? 'fas fa-edit' : 'fas fa-user-plus'"></i>
+                        <span th:text="${isEdit} ? 'Customer Information' : 'New Customer Registration'">Customer Form</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/customers/save}" th:object="${customer}" method="post">
+                        <!-- Customer ID -->
+                        <div class="mb-3">
+                            <label for="customerID" class="form-label required-field">Customer ID</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-id-badge"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="customerID" 
+                                       th:field="*{customerID}" 
+                                       th:readonly="${isEdit}"
+                                       placeholder="e.g., CUST001" 
+                                       required>
+                            </div>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i>
+                                <span th:if="${isEdit}">Customer ID cannot be changed after creation.</span>
+                                <span th:unless="${isEdit}">Enter a unique customer identifier (e.g., CUST001, CUST002).</span>
+                            </div>
+                        </div>
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label required-field">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="name" 
+                                       th:field="*{name}" 
+                                       placeholder="Enter customer's full name" 
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label required-field">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       th:field="*{email}" 
+                                       placeholder="customer@example.com" 
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-4">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="phoneNumber" 
+                                       th:field="*{phoneNumber}" 
+                                       placeholder="123-456-7890">
+                            </div>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i>
+                                Phone number is optional but recommended for contact purposes.
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/customers" class="btn btn-secondary btn-lg me-md-2">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i th:class="${isEdit} ? 'fas fa-save' : 'fas fa-plus'"></i>
+                                <span th:text="${isEdit} ? 'Update Customer' : 'Add Customer'">Save</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Preview Card (for edit mode) -->
+            <div th:if="${isEdit}" class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-eye"></i> Current Customer Information
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3"><strong>Customer ID:</strong></div>
+                        <div class="col-sm-9" th:text="${customer.customerID}">CUST001</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3"><strong>Name:</strong></div>
+                        <div class="col-sm-9" th:text="${customer.name}">John Doe</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3"><strong>Email:</strong></div>
+                        <div class="col-sm-9" th:text="${customer.email}">john@example.com</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3"><strong>Phone:</strong></div>
+                        <div class="col-sm-9" th:text="${customer.phoneNumber ?: 'Not provided'}">123-456-7890</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Information -->
+            <div class="card mt-4 border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">
+                        <i class="fas fa-lightbulb"></i> Tips
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li>Customer ID must be unique in the system</li>
+                        <li>Email address will be used for communication and must be valid</li>
+                        <li>Phone number is optional but helps with customer contact</li>
+                        <li>All required fields must be filled before saving</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const customerID = document.getElementById('customerID').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!customerID || !name || !email) {
+                e.preventDefault();
+                alert('Please fill in all required fields (marked with *)');
+                return false;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                alert('Please enter a valid email address');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+</body>
+</html>

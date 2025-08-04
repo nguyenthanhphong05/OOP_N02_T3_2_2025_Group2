@@ -1,0 +1,7 @@
+Room Information
+================
+Room Number: 101
+Room Type: Single
+Price per Night: $80
+Available: Yes
+Generated on: 2025-08-04T17:44:55.883954900

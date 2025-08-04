@@ -1,0 +1,342 @@
+/* Hotel Management System - Global CSS Variables and Styles */
+
+:root {
+    /* Primary Colors */
+    --primary-color: #007bff;
+    --primary-dark: #0056b3;
+    --primary-light: #66b3ff;
+    
+    /* Secondary Colors */
+    --secondary-color: #6c757d;
+    --secondary-dark: #545b62;
+    --secondary-light: #adb5bd;
+    
+    /* Status Colors */
+    --success-color: #28a745;
+    --success-dark: #1e7e34;
+    --success-light: #d4edda;
+    
+    --warning-color: #ffc107;
+    --warning-dark: #e0a800;
+    --warning-light: #fff3cd;
+    
+    --danger-color: #dc3545;
+    --danger-dark: #c82333;
+    --danger-light: #f8d7da;
+    
+    --info-color: #17a2b8;
+    --info-dark: #138496;
+    --info-light: #d1ecf1;
+    
+    /* Background Colors */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #e9ecef;
+    --bg-dark: #343a40;
+    --bg-light: #ffffff;
+    
+    /* Text Colors */
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-muted: #868e96;
+    --text-light: #ffffff;
+    
+    /* Border and Shadow */
+    --border-color: #dee2e6;
+    --border-radius: 0.375rem;
+    --border-radius-lg: 0.75rem;
+    --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 3rem;
+    
+    /* Typography */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xxl: 1.5rem;
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+}
+
+/* Global Styles */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Card Enhancements */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0 !important;
+}
+
+/* Custom Dashboard Cards */
+.stats-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--text-light);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(30px, -30px);
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.stats-label {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+/* Status Indicators */
+.status-available {
+    background-color: var(--success-color);
+    color: var(--text-light);
+}
+
+.status-occupied {
+    background-color: var(--danger-color);
+    color: var(--text-light);
+}
+
+.status-maintenance {
+    background-color: var(--warning-color);
+    color: var(--text-primary);
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow);
+}
+
+/* Navigation Enhancements */
+.navbar-brand {
+    font-weight: bold;
+    font-size: var(--font-size-xl);
+}
+
+.nav-link {
+    transition: var(--transition-fast);
+    border-radius: var(--border-radius);
+    margin: 0 var(--spacing-xs);
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Button Enhancements */
+.btn {
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: var(--success-dark);
+    border-color: var(--success-dark);
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-dark);
+    border-color: var(--warning-dark);
+    transform: translateY(-1px);
+}
+
+.btn-info {
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+.btn-info:hover {
+    background-color: var(--info-dark);
+    border-color: var(--info-dark);
+    transform: translateY(-1px);
+}
+
+/* Quick Action Cards */
+.quick-action-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.quick-action-card:hover {
+    color: inherit;
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+.quick-action-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-secondary);
+}
+
+.progress-bar {
+    border-radius: var(--border-radius);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-number {
+        font-size: 2rem;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .quick-action-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* Alert Enhancements */
+.alert {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-success {
+    background-color: var(--success-light);
+    color: var(--success-dark);
+}
+
+.alert-warning {
+    background-color: var(--warning-light);
+    color: var(--warning-dark);
+}
+
+.alert-danger {
+    background-color: var(--danger-light);
+    color: var(--danger-dark);
+}
+
+.alert-info {
+    background-color: var(--info-light);
+    color: var(--info-dark);
+}
+
+/* Table Enhancements */
+.table {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: linear-gradient(45deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, var(--success-color), var(--success-dark));
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(135deg, var(--warning-color), var(--warning-dark));
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, var(--info-color), var(--info-dark));
+}

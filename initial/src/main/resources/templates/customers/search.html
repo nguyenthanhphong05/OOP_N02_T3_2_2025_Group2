@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Customers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/hotel-theme.css" rel="stylesheet">
+    <style>
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-card {
+            border: none;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+        }
+        .no-results {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 40px 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-building"></i> Hotel Management
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="/rooms">
+                        <i class="fas fa-bed"></i> Rooms
+                    </a>
+                    <a class="nav-link active" href="/customers">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-primary text-center">
+                    <i class="fas fa-search"></i> Search Customers
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/rooms">Hotel Management</a></li>
+                        <li class="breadcrumb-item"><a href="/customers">Customer Management</a></li>
+                        <li class="breadcrumb-item active">Search Customers</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <!-- Search Form -->
+            <div class="card search-card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-filter"></i> Customer Search
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="/customers/search">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="keyword" 
+                                           th:value="${keyword}"
+                                           placeholder="Search by name, email, or customer ID..." 
+                                           autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-search"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Search across customer names, email addresses, and customer IDs. Leave empty to show all customers.
+                        </small>
+                    </div>
+                    
+                    <!-- Clear Search -->
+                    <div th:if="${keyword}" class="mt-3">
+                        <a href="/customers/search" class="btn btn-outline-secondary">
+                            <i class="fas fa-times"></i> Clear Search
+                        </a>
+                        <span class="text-muted ms-2">
+                            Searching for: "<strong th:text="${keyword}">keyword</strong>"
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="card search-card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Search Results
+                        <span class="badge bg-light text-dark ms-2" th:text="${customers.size()}">0</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- No Results -->
+                    <div th:if="${customers.empty}" class="no-results">
+                        <div th:if="${keyword}">
+                            <i class="fas fa-search-minus fa-4x mb-3 text-muted"></i>
+                            <h4>No customers found</h4>
+                            <p class="lead">
+                                No customers match your search criteria "<strong th:text="${keyword}">keyword</strong>".
+                            </p>
+                            <div class="mt-4">
+                                <a href="/customers/search" class="btn btn-primary me-2">
+                                    <i class="fas fa-search"></i> Try Another Search
+                                </a>
+                                <a href="/customers/new" class="btn btn-success">
+                                    <i class="fas fa-plus"></i> Add New Customer
+                                </a>
+                            </div>
+                        </div>
+                        <div th:unless="${keyword}">
+                            <i class="fas fa-users fa-4x mb-3 text-muted"></i>
+                            <h4>No customers in system</h4>
+                            <p class="lead">There are no customers registered in the system yet.</p>
+                            <a href="/customers/new" class="btn btn-success btn-lg">
+                                <i class="fas fa-plus"></i> Add First Customer
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Results Table -->
+                    <div th:if="!${customers.empty}">
+                        <div class="mb-3">
+                            <p class="text-muted mb-0">
+                                <i class="fas fa-info-circle"></i>
+                                Found <strong th:text="${customers.size()}">0</strong> customer(s)
+                                <span th:if="${keyword}"> matching "<strong th:text="${keyword}">keyword</strong>"</span>
+                            </p>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <i class="fas fa-id-badge"></i> Customer ID
+                                        </th>
+                                        <th scope="col">
+                                            <i class="fas fa-user"></i> Full Name
+                                        </th>
+                                        <th scope="col">
+                                            <i class="fas fa-envelope"></i> Email
+                                        </th>
+                                        <th scope="col">
+                                            <i class="fas fa-phone"></i> Phone
+                                        </th>
+                                        <th scope="col" class="text-center">
+                                            <i class="fas fa-cogs"></i> Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="customer : ${customers}">
+                                        <td>
+                                            <span class="badge bg-primary fs-6" th:text="${customer.customerID}">CUST001</span>
+                                        </td>
+                                        <td>
+                                            <strong th:text="${customer.name}">John Doe</strong>
+                                        </td>
+                                        <td>
+                                            <a th:href="'mailto:' + ${customer.email}" th:text="${customer.email}">john@example.com</a>
+                                        </td>
+                                        <td th:text="${customer.phoneNumber ?: 'Not provided'}">123-456-7890</td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group">
+                                                <a th:href="@{/customers/view/{id}(id=${customer.customerID})}" 
+                                                   class="btn btn-sm btn-outline-info" 
+                                                   title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a th:href="@{/customers/edit/{id}(id=${customer.customerID})}" 
+                                                   class="btn btn-sm btn-outline-warning"
+                                                   title="Edit Customer">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a th:href="@{/customers/delete/{id}(id=${customer.customerID})}" 
+                                                   class="btn btn-sm btn-outline-danger"
+                                                   title="Delete Customer"
+                                                   onclick="return confirm('Are you sure you want to delete this customer?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center mt-4">
+                <div class="btn-group" role="group">
+                    <a href="/customers" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-home"></i> Customer Menu
+                    </a>
+                    <a href="/customers/list" class="btn btn-info btn-lg">
+                        <i class="fas fa-list"></i> All Customers
+                    </a>
+                    <a href="/customers/new" class="btn btn-success btn-lg">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-focus search input
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('input[name="keyword"]');
+            if (searchInput && !searchInput.value) {
+                searchInput.focus();
+            }
+        });
+
+        // Search on Enter key
+        document.querySelector('input[name="keyword"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.target.closest('form').submit();
+            }
+        });
+    </script>
+</body>
+</html>

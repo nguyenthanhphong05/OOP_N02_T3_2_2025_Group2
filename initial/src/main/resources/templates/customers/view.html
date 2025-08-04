@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/hotel-theme.css" rel="stylesheet">
+    <style>
+        .customer-card {
+            border: none;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .info-row {
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-lg) 0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-light);
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-building"></i> Hotel Management
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="/rooms">
+                        <i class="fas fa-bed"></i> Rooms
+                    </a>
+                    <a class="nav-link active" href="/customers">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-primary">
+                    <i class="fas fa-user-circle"></i> Customer Details
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/rooms">Hotel Management</a></li>
+                        <li class="breadcrumb-item"><a href="/customers">Customer Management</a></li>
+                        <li class="breadcrumb-item"><a href="/customers/list">Customer List</a></li>
+                        <li class="breadcrumb-item active">Customer Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Customer Information Card -->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card customer-card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-id-card"></i> Customer Profile
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Profile Avatar -->
+                        <div class="text-center mb-4">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3 class="text-primary" th:text="${customer.name}">John Doe</h3>
+                            <p class="text-muted mb-0">Customer Profile</p>
+                        </div>
+
+                        <!-- Customer Information -->
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-id-badge text-primary"></i> Customer ID:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="badge bg-primary fs-6" th:text="${customer.customerID}">CUST001</span>
+                            </div>
+                        </div>
+
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-user text-success"></i> Full Name:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <span th:text="${customer.name}">John Doe</span>
+                            </div>
+                        </div>
+
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-envelope text-info"></i> Email Address:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <a th:href="'mailto:' + ${customer.email}" 
+                                   th:text="${customer.email}"
+                                   class="text-decoration-none">john@example.com</a>
+                                <a th:href="'mailto:' + ${customer.email}" 
+                                   class="btn btn-sm btn-outline-info ms-2">
+                                    <i class="fas fa-paper-plane"></i> Send Email
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-phone text-warning"></i> Phone Number:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <span th:if="${customer.phoneNumber}" th:text="${customer.phoneNumber}">123-456-7890</span>
+                                <span th:unless="${customer.phoneNumber}" class="text-muted">Not provided</span>
+                                <a th:if="${customer.phoneNumber}" 
+                                   th:href="'tel:' + ${customer.phoneNumber}" 
+                                   class="btn btn-sm btn-outline-warning ms-2">
+                                    <i class="fas fa-phone"></i> Call
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-calendar-alt text-secondary"></i> Registration Date:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="text-muted">Information not available</span>
+                            </div>
+                        </div>
+
+                        <div class="row info-row">
+                            <div class="col-sm-4">
+                                <strong><i class="fas fa-chart-line text-secondary"></i> Status:</strong>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="badge bg-success">Active Customer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="card mt-4">
+                    <div class="card-body text-center">
+                        <div class="btn-group" role="group" aria-label="Customer actions">
+                            <a th:href="@{/customers/edit/{id}(id=${customer.customerID})}" 
+                               class="btn btn-warning btn-lg">
+                                <i class="fas fa-edit"></i> Edit Customer
+                            </a>
+                            <a th:href="@{/customers/delete/{id}(id=${customer.customerID})}" 
+                               class="btn btn-danger btn-lg"
+                               onclick="return confirm('Are you sure you want to delete this customer?\\n\\nThis action cannot be undone.\\n\\nCustomer: ' + document.querySelector('h3').innerText)">
+                                <i class="fas fa-trash"></i> Delete Customer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="card mt-4">
+                    <div class="card-body text-center">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a href="/customers/list" class="btn btn-info btn-lg me-md-2">
+                                <i class="fas fa-list"></i> Back to Customer List
+                            </a>
+                            <a href="/customers" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-home"></i> Customer Menu
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card mt-4 border-info">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-bolt"></i> Quick Actions
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-3">
+                                <a href="/rooms" class="btn btn-outline-primary btn-sm w-100">
+                                    <i class="fas fa-bed"></i><br>
+                                    <small>Check Room Availability</small>
+                                </a>
+                            </div>
+                            <div class="col-md-4 text-center mb-3">
+                                <a href="/customers/new" class="btn btn-outline-success btn-sm w-100">
+                                    <i class="fas fa-user-plus"></i><br>
+                                    <small>Add New Customer</small>
+                                </a>
+                            </div>
+                            <div class="col-md-4 text-center mb-3">
+                                <a href="/customers/search" class="btn btn-outline-warning btn-sm w-100">
+                                    <i class="fas fa-search"></i><br>
+                                    <small>Search Customers</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

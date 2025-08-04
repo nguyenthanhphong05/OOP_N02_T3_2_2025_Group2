@@ -1,0 +1,7 @@
+Room Information
+================
+Room Number: 111
+Room Type: Single
+Price per Night: $100
+Available: Yes
+Generated on: 2025-08-03T14:40:47.169391900
