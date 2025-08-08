@@ -80,6 +80,8 @@ src/
 ### CURRENTLY SETTING THIS PRJ TO WORK WITH GS FRAMEWORK 
     - added mvn
     - moved model - service 
+
+https://249v6r8j-8080.aue.devtunnels.ms/simpleDB
     - adding controller and static. 
 
 
