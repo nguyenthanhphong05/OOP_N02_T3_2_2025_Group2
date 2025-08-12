@@ -1,1 +1,6 @@
+com\g2\hotelm\service\RoomServiceTest.class
+com\g2\hotelm\integration\DatabaseIntegrationTest.class
+com\g2\hotelm\repository\RoomRepositoryDatabaseTest.class
 com\g2\hotelm\repository\RoomRepositoryTest.class
+com\g2\hotelm\test\DatabaseTestRunner.class
+com\g2\hotelm\database\DatabaseConfigurationTest.class

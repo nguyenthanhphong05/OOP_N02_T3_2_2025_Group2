@@ -32,8 +32,12 @@
     >> model
         >> Room.java (hoàn thiện)
     >> repository
+        >> Roomrepository.java
     >> service
+        >> RoomService.java
     >> controller
+        >> RoomController.java
+        >> HomeController.java (Redirect /rooms at this moment)
     >> resources
         >> css 
         >> html
@@ -46,6 +50,7 @@
 
 ## Change log 
   - adding H2 db to room model.
+  - adding controller - frontend.
 
 ## Fun stuffs 
 Check changelog or Okimstupid.md.
