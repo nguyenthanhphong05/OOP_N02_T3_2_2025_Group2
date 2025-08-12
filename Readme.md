@@ -26,10 +26,11 @@
 - Thiết kế Frontend với Bootstrap
 
 ## Project Construction
-
->> data 
+```
+> data 
 >> src 
     >> model
+        >> Room.java (hoàn thiện)
     >> repository
     >> service
     >> controller
@@ -37,7 +38,14 @@
         >> css 
         >> html
     >> test
+```
 
 ## UML 
 
 ## Diagram 
+
+## Change log 
+  - adding H2 db to room model.
+
+## Fun stuffs 
+Check changelog or Okimstupid.md.
