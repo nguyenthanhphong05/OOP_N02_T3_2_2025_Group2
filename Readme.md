@@ -1,5 +1,6 @@
 ## Group 2 - Hotel Manager
 * Để phù hợp với yêu cầu đề bài, nhóm 2 quyết định làm lại toàn bộ project
+*Toàn bộ lịch sử commit - changlog vẫn đươc lưu ở branch "old"*
 - Những thay đổi chính trong project bao gồm: 
 - Sử dụng 2 model: Room và Booking thay vì 3 model 
 - Sử dụng java Springboot framework 
@@ -7,7 +8,8 @@
 
 # Phân chia công việc 
 - Phân chia các task cho từng thành viên trong nhóm
-[Phong] // Nguyễn Thanh Phong - 24100259 
+
+**Nguyễn Thanh Phong - 24100259**
 - Thiết kế cơ sở dữ liệu
 - Triển khai - hoàn thiện Model Room
 - Triển khai model Reservations 
@@ -16,7 +18,7 @@
 - Thiết kế - hoàn thiện Front End. 
 - Viết main docx - UML
 
-[Kiên] // Đặng Đức Kiên - 24100323
+**Đặng Đức Kiên - 24100323**
 - Triển khai - **hoàn thiện** Model Booking
 - Triển khai services Booking
 - Viết Unit test cho Model Room
