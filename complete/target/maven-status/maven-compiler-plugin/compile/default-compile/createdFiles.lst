@@ -3,4 +3,5 @@ com\g2\hotelm\HotelManagementApplication.class
 com\g2\hotelm\model\Room.class
 com\g2\hotelm\service\RoomService.class
 com\g2\hotelm\controller\RoomController.class
+com\g2\hotelm\model\Reservation.class
 com\g2\hotelm\repository\RoomRepository.class

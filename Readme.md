@@ -51,6 +51,7 @@
 ## Change log 
   - adding H2 db to room model.
   - adding controller - frontend.
+  - adding Reservation model, test
 
 ## Fun stuffs 
 Check changelog or Okimstupid.md.
