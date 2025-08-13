@@ -246,9 +246,9 @@ skinparam class<<implemented>> {
 
 skinparam class<<planned>> {
     BackgroundColor #FFEBEE
-    BorderColor #D32F2F
+    BorderColor #800b0bff
     BorderThickness 2
-    FontColor #B71C1C
+    FontColor #ffffffff
 }
 
 skinparam interface<<implemented>> {
