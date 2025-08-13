@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.repository.RoomRepositoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-08-13T05:11:26" hostname="DESKTOP-OTQMG1O" time="0.036">
+  <properties/>
+  <testcase name="testFindById()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.021"/>
+  <testcase name="testFindByIdNotFound()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.004"/>
+  <testcase name="testFindByIsAvailableTrue()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.009"/>
+  <system-out><![CDATA[2025-08-13T12:11:25.993+07:00  INFO 40104 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.repository.RoomRepositoryTest]: RoomRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-13T12:11:26.002+07:00  INFO 40104 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.repository.RoomRepositoryTest
+2025-08-13T12:11:26.006+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+2025-08-13T12:11:26.028+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.id=?
+2025-08-13T12:11:26.032+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+2025-08-13T12:11:26.034+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+2025-08-13T12:11:26.034+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.is_available
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.is_available
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -148,7 +148,18 @@ HHH90000025: H2Dialect does not need to be specified explicitly
 - **Templates**: `src/main/resources/templates/`
 - **Configuration**: `src/main/resources/application.properties`
 
+## Unformated 
+Missing no-argument constructor - JPA entities need a default constructor
+Missing setEndDate implementation - the method is empty
+Duplicate equals condition - there are two if (this == o) return true;
+
 ---
 
+## Overwrite issue (Những lỗi fix source của người khác)
+- Customer name uniqueness
+The customerName field has unique = true, which means we can't have two reservations with the same customer name. This doesn't make sense for a hotel system where the same customer should be able to make multiple reservations.
+ -> customerName field has unique = false
+
 **Tài liệu này được cập nhật lần cuối**: 12/08/2025
-**Tác giả**: Team Group 2 - OOP N02 T3 2025 - coded with Copilot.
+**Tác giả**: Team Group 2 - OOP N02 T3 2025
+*Debug - Tests Generate with Copilot*

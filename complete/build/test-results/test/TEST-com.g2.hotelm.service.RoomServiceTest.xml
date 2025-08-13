@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.service.RoomServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-08-13T05:11:26" hostname="DESKTOP-OTQMG1O" time="0.425">
+  <properties/>
+  <testcase name="testSaveRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.395"/>
+  <testcase name="testFindAllRooms()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.004"/>
+  <testcase name="testUpdateRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <testcase name="testUpdateRoomWithNullId()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.008"/>
+  <testcase name="testDeleteRoomWithNullId()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <testcase name="testUpdateRoomWithNullRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <testcase name="testDeleteRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
