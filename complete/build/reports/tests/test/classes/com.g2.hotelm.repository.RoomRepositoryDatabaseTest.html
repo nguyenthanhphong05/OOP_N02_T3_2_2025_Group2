@@ -79,17 +79,17 @@
 </thead>
 <tr>
 <td class="success">testDatabasePersistenceAfterFlush()</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testDeleteRoom()</td>
 <td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">testDeleteRoom()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">testFindAllRooms()</td>
-<td class="success">0.014s</td>
+<td class="success">0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -99,17 +99,17 @@
 </tr>
 <tr>
 <td class="success">testMultipleOperationsInSequence()</td>
-<td class="success">0.012s</td>
+<td class="success">0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testSaveAndRetrieveRoom()</td>
-<td class="success">0.006s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testUpdateRoom()</td>
-<td class="success">0.010s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -117,8 +117,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-08-13T12:11:25.732+07:00  INFO 40104 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.repository.RoomRepositoryDatabaseTest]: RoomRepositoryDatabaseTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-08-13T12:11:25.734+07:00  INFO 40104 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.repository.RoomRepositoryDatabaseTest
+<pre>2025-08-13T18:40:08.004+07:00  INFO 38616 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.repository.RoomRepositoryDatabaseTest]: RoomRepositoryDatabaseTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-13T18:40:08.009+07:00  INFO 38616 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.repository.RoomRepositoryDatabaseTest
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -128,27 +128,27 @@
 
  :: Spring Boot ::                (v3.3.0)
 
-2025-08-13T12:11:25.750+07:00  INFO 40104 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Starting RoomRepositoryDatabaseTest using Java 21.0.7 with PID 40104 (started by For Work in E:\OOPG2\complete)
-2025-08-13T12:11:25.750+07:00 DEBUG 40104 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Running with Spring Boot v3.3.0, Spring v6.1.8
-2025-08-13T12:11:25.750+07:00  INFO 40104 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : The following 1 profile is active: &quot;test&quot;
-2025-08-13T12:11:25.815+07:00  INFO 40104 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-13T12:11:25.820+07:00  INFO 40104 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 2 JPA repository interfaces.
-2025-08-13T12:11:25.830+07:00  INFO 40104 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2025-08-13T12:11:25.840+07:00  INFO 40104 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:cbdbb48e-41cf-40d0-a455-9053ece9a5f5;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2025-08-13T12:11:25.851+07:00  INFO 40104 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-13T12:11:25.852+07:00  INFO 40104 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-08-13T12:11:25.857+07:00  INFO 40104 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-13T12:11:25.859+07:00  WARN 40104 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-08-13T12:11:25.895+07:00  INFO 40104 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-08-13T12:11:25.895+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.025+07:00  INFO 38616 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Starting RoomRepositoryDatabaseTest using Java 21.0.7 with PID 38616 (started by For Work in E:\OOPG2\complete)
+2025-08-13T18:40:08.025+07:00 DEBUG 38616 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Running with Spring Boot v3.3.0, Spring v6.1.8
+2025-08-13T18:40:08.025+07:00  INFO 38616 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : The following 1 profile is active: &quot;test&quot;
+2025-08-13T18:40:08.083+07:00  INFO 38616 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13T18:40:08.092+07:00  INFO 38616 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 2 JPA repository interfaces.
+2025-08-13T18:40:08.101+07:00  INFO 38616 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2025-08-13T18:40:08.111+07:00  INFO 38616 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:cffde695-a0f4-4071-810e-7b2dc55f7e94;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2025-08-13T18:40:08.147+07:00  INFO 38616 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13T18:40:08.150+07:00  INFO 38616 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-13T18:40:08.158+07:00  INFO 38616 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-13T18:40:08.160+07:00  WARN 38616 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-13T18:40:08.201+07:00  INFO 38616 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-13T18:40:08.201+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     drop table if exists reservations cascade 
 Hibernate: 
     drop table if exists reservations cascade 
-2025-08-13T12:11:25.895+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.202+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     drop table if exists rooms cascade 
 Hibernate: 
     drop table if exists rooms cascade 
-2025-08-13T12:11:25.895+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.202+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     create table reservations (
         id bigint generated by default as identity,
         customer_name varchar(255) not null,
@@ -166,7 +166,7 @@ Hibernate:
         start_date varchar(255) not null,
         primary key (id)
     )
-2025-08-13T12:11:25.895+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.204+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     create table rooms (
         is_available boolean not null,
         price float(53) not null check (price&gt;=0),
@@ -186,9 +186,9 @@ Hibernate:
         type varchar(255) not null,
         primary key (id)
     )
-2025-08-13T12:11:25.895+07:00  INFO 40104 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-13T12:11:25.930+07:00  INFO 40104 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Started RoomRepositoryDatabaseTest in 0.182 seconds (process running for 5.594)
-2025-08-13T12:11:25.931+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.205+07:00  INFO 38616 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T18:40:08.232+07:00  INFO 38616 --- [    Test worker] c.g.h.r.RoomRepositoryDatabaseTest       : Started RoomRepositoryDatabaseTest in 0.22 seconds (process running for 5.627)
+2025-08-13T18:40:08.238+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -202,7 +202,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.931+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.241+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -216,7 +216,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.931+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.241+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -230,7 +230,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.931+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.243+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -250,7 +250,7 @@ Hibernate:
         r1_0.type 
     from
         rooms r1_0
-2025-08-13T12:11:25.943+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.249+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -264,7 +264,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.943+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.251+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -288,7 +288,7 @@ Hibernate:
         rooms r1_0 
     where
         r1_0.id=?
-2025-08-13T12:11:25.943+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.252+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     update
         rooms 
     set
@@ -310,7 +310,7 @@ Hibernate:
         type=? 
     where
         id=?
-2025-08-13T12:11:25.943+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.253+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -334,7 +334,7 @@ Hibernate:
         rooms r1_0 
     where
         r1_0.id=?
-2025-08-13T12:11:25.958+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.258+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -348,7 +348,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.959+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.259+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -372,7 +372,7 @@ Hibernate:
         rooms r1_0 
     where
         r1_0.id=?
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.263+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -386,7 +386,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.265+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         count(*) 
     from
@@ -396,7 +396,7 @@ Hibernate:
         count(*) 
     from
         rooms r1_0
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.267+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     update
         rooms 
     set
@@ -418,7 +418,7 @@ Hibernate:
         type=? 
     where
         id=?
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.269+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -432,7 +432,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.270+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         count(*) 
     from
@@ -442,7 +442,7 @@ Hibernate:
         count(*) 
     from
         rooms r1_0
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.271+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     delete 
     from
         rooms 
@@ -454,7 +454,7 @@ Hibernate:
         rooms 
     where
         id=?
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.272+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         count(*) 
     from
@@ -464,7 +464,7 @@ Hibernate:
         count(*) 
     from
         rooms r1_0
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.273+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -484,7 +484,7 @@ Hibernate:
         r1_0.type 
     from
         rooms r1_0
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.276+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -498,7 +498,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.278+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     delete 
     from
         rooms 
@@ -510,7 +510,7 @@ Hibernate:
         rooms 
     where
         id=?
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.279+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -534,7 +534,7 @@ Hibernate:
         rooms r1_0 
     where
         r1_0.id=?
-2025-08-13T12:11:25.964+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.280+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         count(*) 
     from
@@ -544,7 +544,7 @@ Hibernate:
         count(*) 
     from
         rooms r1_0
-2025-08-13T12:11:25.983+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.284+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -558,7 +558,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.984+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.285+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -582,7 +582,7 @@ Hibernate:
         rooms r1_0 
     where
         r1_0.id=?
-2025-08-13T12:11:25.989+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.291+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -596,7 +596,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.990+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.292+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -610,7 +610,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.991+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.293+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     insert 
     into
         rooms
@@ -624,7 +624,7 @@ Hibernate:
         (description, is_available, price, room_id, type, id) 
     values
         (?, ?, ?, ?, ?, default)
-2025-08-13T12:11:25.993+07:00 DEBUG 40104 --- [    Test worker] org.hibernate.SQL                        : 
+2025-08-13T18:40:08.295+07:00 DEBUG 38616 --- [    Test worker] org.hibernate.SQL                        : 
     select
         r1_0.id,
         r1_0.description,
@@ -659,7 +659,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.7</a> at Aug 13, 2025, 12:11:26 PM</p>
+<a href="http://www.gradle.org">Gradle 8.7</a> at Aug 13, 2025, 6:40:09 PM</p>
 </div>
 </div>
 </body>
