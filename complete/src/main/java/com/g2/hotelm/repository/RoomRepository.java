@@ -25,4 +25,10 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findAvailableRoomsByType(@Param("type") RoomType type, 
                                        @Param("checkIn") LocalDate checkIn, 
                                        @Param("checkOut") LocalDate checkOut);
+    
+    @Query("SELECT r FROM Room r WHERE r.isAvailable = true AND r.id NOT IN " +
+           "(SELECT res.room.id FROM Reservation res WHERE res.checkInDate <= :checkOut AND res.checkOutDate >= :checkIn " +
+           "AND res.status IN (com.g2.hotelm.model.ReservationStatus.CONFIRMED, com.g2.hotelm.model.ReservationStatus.CHECKED_IN))")
+    List<Room> findAvailableRooms(@Param("checkIn") LocalDate checkIn, 
+                                 @Param("checkOut") LocalDate checkOut);
 }

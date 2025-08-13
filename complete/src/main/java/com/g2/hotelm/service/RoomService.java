@@ -37,6 +37,20 @@ public class RoomService {
         return roomRepository.findAvailableRoomsByType(type, checkIn, checkOut);
     }
     
+    /**
+     * Find all available rooms for a date range
+     */
+    public List<Room> findAvailableRoomsByDateRange(LocalDate checkIn, LocalDate checkOut) {
+        return roomRepository.findAvailableRooms(checkIn, checkOut);
+    }
+    
+    /**
+     * Find all available rooms (without date filter)
+     */
+    public List<Room> findAvailableRooms() {
+        return roomRepository.findAll(); // For now, return all rooms
+    }
+    
     public boolean isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut) {
         return room.isAvailableForPeriod(checkIn, checkOut);
     }

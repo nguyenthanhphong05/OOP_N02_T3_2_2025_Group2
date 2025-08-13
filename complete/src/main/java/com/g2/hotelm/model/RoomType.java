@@ -4,7 +4,8 @@ public enum RoomType {
     SINGLE("Single Room"),
     DOUBLE("Double Room"),
     SUITE("Suite"),
-    DELUXE("Deluxe Room");
+    DELUXE("Deluxe Room"),
+    STANDARD("Standard Room");
     
     private final String displayName;
     

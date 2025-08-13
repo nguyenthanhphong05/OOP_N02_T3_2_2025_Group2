@@ -10,6 +10,14 @@
     <div class="container mt-4">
         <h1>Hotel Room Management</h1>
         
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/rooms">Rooms</a>
+                <a class="nav-link" href="/reservations">Reservations</a>
+            </div>
+        </nav>
+        
         <!-- Success/Error Messages -->
         <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
         <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
@@ -22,14 +30,15 @@
                     <input type="hidden" th:field="*{id}" th:if="${editMode}">
                     <div class="row">
                         <div class="col-md-2">
-                            <input type="number" th:field="*{roomId}" class="form-control" placeholder="Room ID" required>
+                            <input type="text" th:field="*{roomId}" class="form-control" placeholder="Room ID" required>
                         </div>
                         <div class="col-md-2">
                             <select th:field="*{type}" class="form-control" required>
                                 <option value="">Select Type</option>
-                                <option value="Standard">Standard</option>
-                                <option value="Deluxe">Deluxe</option>
-                                <option value="Suite">Suite</option>
+                                <option value="SINGLE">Single Room</option>
+                                <option value="DOUBLE">Double Room</option>
+                                <option value="SUITE">Suite</option>
+                                <option value="DELUXE">Deluxe Room</option>
                             </select>
                         </div>
                         <div class="col-md-2">

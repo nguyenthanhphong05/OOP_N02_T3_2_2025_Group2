@@ -28,19 +28,16 @@ public class Reservation {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @Column(nullable = false)
+    @Column(name = "customer_name", nullable = false)
     private String customerName;    
 
-    @Column(nullable = false)
+    @Column(name = "check_in_date", nullable = false)
     private LocalDate checkInDate;
 
-    @Column(nullable = false)
+    @Column(name = "check_out_date", nullable = false)
     private LocalDate checkOutDate;
 
-    @Column(nullable = false)
-    private int numberOfGuests;
-
-    @Column(nullable = false)
+    @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
     @Enumerated(EnumType.STRING)
@@ -52,14 +49,19 @@ public class Reservation {
         // Default constructor for JPA
     }
 
-    public Reservation(Room room, String customerName, LocalDate checkInDate, LocalDate checkOutDate, int numberOfGuests) {
+    public Reservation(Room room, String customerName, LocalDate checkInDate, LocalDate checkOutDate) {
         this.room = room;
         this.customerName = customerName;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
-        this.numberOfGuests = numberOfGuests;
         this.status = ReservationStatus.PENDING;
-        this.totalPrice = calculateTotalPrice();
+        // Calculate total price directly to avoid overridable method call in constructor
+        if (room != null && checkInDate != null && checkOutDate != null) {
+            long nights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+            this.totalPrice = room.getPrice() * nights;
+        } else {
+            this.totalPrice = 0.0;
+        }
     }
 
     // Getters and setters
@@ -77,10 +79,6 @@ public class Reservation {
 
     public void setRoom(Room room) {
         this.room = room;
-    }
-
-    public String getRoomType() {
-        return room != null ? room.getType().toString() : null;
     }
 
     public String getCustomerName() {
@@ -105,14 +103,6 @@ public class Reservation {
 
     public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
-    }
-
-    public int getNumberOfGuests() {
-        return numberOfGuests;
-    }
-
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
     }
 
     public Double getTotalPrice() {
@@ -173,10 +163,9 @@ public class Reservation {
         return "Reservation{" +
                 "id=" + id +
                 ", customerName='" + customerName + '\'' +
-                ", roomType='" + getRoomType() + '\'' +
+                ", room=" + (room != null ? room.getRoomId() : null) +
                 ", checkInDate=" + checkInDate +
                 ", checkOutDate=" + checkOutDate +
-                ", numberOfGuests=" + numberOfGuests +
                 ", totalPrice=" + totalPrice +
                 ", status=" + status +
                 '}';
