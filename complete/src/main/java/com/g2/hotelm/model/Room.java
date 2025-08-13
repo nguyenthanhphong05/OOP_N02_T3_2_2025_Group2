@@ -1,18 +1,25 @@
 package com.g2.hotelm.model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity 
 @Table(name = "rooms")
-
-
 public class Room {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +27,12 @@ public class Room {
 
     @Column(unique = true, nullable = false)
     @NotNull(message = "Room ID number la bat buoc!")
-    @Min(value = 1, message = "Room ID number can la so duong")
-    private int roomId;
+    private String roomId;
 
     @Column(nullable = false)
     @NotNull(message = "Room type la bat buoc!")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private RoomType type;
 
     @Column(nullable = false)
     @NotNull(message = "Room price la bat buoc!")
@@ -40,23 +47,26 @@ public class Room {
     @NotNull(message = "Room description la bat buoc!")
     private String description;
 
-    // Constructors, getters, and setters
-    // Def Cons
+    // Bidirectional relationship with Reservation
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    // Constructors
     public Room() {
-        this.id = null;
-        this.type = "standard";
+        this.type = RoomType.SINGLE;
         this.price = 0.0;
         this.isAvailable = true;
         this.description = "Standard room";
+        this.reservations = new ArrayList<>();
     }
 
-    // Cons with Param
-    public Room(Long id, String type, Double price, Boolean isAvailable, String description) {
-        this.id = id;
+    public Room(String roomId, RoomType type, Double price, Boolean isAvailable, String description) {
+        this.roomId = roomId;
         this.type = type;
         this.price = price;
         this.isAvailable = isAvailable;
         this.description = description;
+        this.reservations = new ArrayList<>();
     }
 
     //Getter - Setter 
@@ -67,18 +77,18 @@ public class Room {
         this.id = id;
     }
 
-    public int getRoomId() {
+    public String getRoomId() {
         return roomId;
     }
     
-    public void setRoomId(int roomId) {
+    public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
     
-    public String getType() {
+    public RoomType getType() {
         return type;
     }
-    public void setType(String type) {
+    public void setType(RoomType type) {
         this.type = type;
     }
 
@@ -101,6 +111,34 @@ public class Room {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+    
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    // Bidirectional relationship helper methods
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setRoom(this);
+    }
+
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+        reservation.setRoom(null);
+    }
+
+    // Business logic method from UML
+    public boolean isAvailableForPeriod(LocalDate checkIn, LocalDate checkOut) {
+        return reservations.stream()
+                .filter(reservation -> reservation.getStatus() != ReservationStatus.CANCELLED)
+                .noneMatch(reservation -> 
+                    !(checkOut.isBefore(reservation.getCheckInDate()) || 
+                      checkIn.isAfter(reservation.getCheckOutDate())));
     }
 
 @Override

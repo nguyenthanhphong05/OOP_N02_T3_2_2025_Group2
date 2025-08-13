@@ -1,12 +1,19 @@
 package com.g2.hotelm.model;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,37 +23,64 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Bidirectional relationship with Room
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room;
+
     @Column(nullable = false)
     private String customerName;    
 
     @Column(nullable = false)
-    private String roomType;
+    private LocalDate checkInDate;
 
     @Column(nullable = false)
-    private String startDate;
+    private LocalDate checkOutDate;
 
     @Column(nullable = false)
-    private String endDate;
+    private int numberOfGuests;
 
-    // Constructors, getters, and setters
+    @Column(nullable = false)
+    private Double totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReservationStatus status = ReservationStatus.PENDING;
+
+    // Constructors
     public Reservation() {
         // Default constructor for JPA
     }
 
-    public Reservation(Long id, String customerName, String roomType, String startDate, String endDate) {
-        this.id = id;
+    public Reservation(Room room, String customerName, LocalDate checkInDate, LocalDate checkOutDate, int numberOfGuests) {
+        this.room = room;
         this.customerName = customerName;
-        this.roomType = roomType;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.numberOfGuests = numberOfGuests;
+        this.status = ReservationStatus.PENDING;
+        this.totalPrice = calculateTotalPrice();
     }
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getRoomType() {
+        return room != null ? room.getType().toString() : null;
     }
 
     public String getCustomerName() {
@@ -57,28 +91,64 @@ public class Reservation {
         this.customerName = customerName;
     }
 
-    public String getRoomType() {
-        return roomType;
+    public LocalDate getCheckInDate() {
+        return checkInDate;
     }
 
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public int getNumberOfGuests() {
+        return numberOfGuests;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
+    // Business logic methods from UML
+    public Double calculateTotalPrice() {
+        if (room != null && checkInDate != null && checkOutDate != null) {
+            long nights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+            return room.getPrice() * nights;
+        }
+        return 0.0;
+    }
+
+    public long getDurationInDays() {
+        if (checkInDate != null && checkOutDate != null) {
+            return ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+        }
+        return 0;
+    }
+
+    public boolean isActive() {
+        return status != null && status.isActive();
     }
 
     @Override
@@ -88,14 +158,14 @@ public class Reservation {
         Reservation that = (Reservation) o;
         return id.equals(that.id) &&
                 customerName.equals(that.customerName) &&
-                roomType.equals(that.roomType) &&
-                startDate.equals(that.startDate) &&
-                endDate.equals(that.endDate);
+                Objects.equals(room, that.room) &&
+                checkInDate.equals(that.checkInDate) &&
+                checkOutDate.equals(that.checkOutDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerName, roomType, startDate, endDate);
+        return Objects.hash(id, customerName, room, checkInDate, checkOutDate);
     }
 
     @Override
@@ -103,9 +173,12 @@ public class Reservation {
         return "Reservation{" +
                 "id=" + id +
                 ", customerName='" + customerName + '\'' +
-                ", roomType='" + roomType + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
+                ", roomType='" + getRoomType() + '\'' +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", numberOfGuests=" + numberOfGuests +
+                ", totalPrice=" + totalPrice +
+                ", status=" + status +
                 '}';
     }
 }

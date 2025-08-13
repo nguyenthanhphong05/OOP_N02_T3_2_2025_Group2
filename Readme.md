@@ -26,17 +26,22 @@
 - Thiết kế Frontend với Bootstrap
 
 ## Project Construction
+- Đang trong quá trình sửa lại cấu trúc theo dạng OOP thay vì data centric.
 ```
 > data 
 >> src 
     >> model
         >> Room.java (hoàn thiện)
+        >> Reservation.java (hoàn thiện)
     >> repository
-        >> Roomrepository.java
+        >> RoomRepository.java
+        >> ReservationRepository.java
     >> service
         >> RoomService.java
+        >> ReservationService.java
     >> controller
         >> RoomController.java
+        >> ReservationController.java
         >> HomeController.java (Redirect /rooms at this moment)
     >> resources
         >> css 
