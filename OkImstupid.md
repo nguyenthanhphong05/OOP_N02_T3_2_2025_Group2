@@ -148,6 +148,19 @@ HHH90000025: H2Dialect does not need to be specified explicitly
 - **Templates**: `src/main/resources/templates/`
 - **Configuration**: `src/main/resources/application.properties`
 
+## Mối quan hệ không đúng chuẩn OOP:
+UML chỉ cho thấy một mối quan hệ primitive thông qua roomId: Long trong Reservation
+Đây là thiết kế procedural, không phải object-oriented
+Thiếu bidirectional relationship đúng nghĩa
+2. Trong Model Layer:
+Chỉ có foreign key reference chứ không phải object reference
+Reservation có roomId: Long thay vì room: Room
+Room không có collection reservations: List<Reservation>
+3. Dịch vụ hoạt động độc lập:
+RoomService và ReservationService hoàn toàn tách biệt
+Không có cross-service dependencies
+Thiếu business logic liên kết giữa Room và Reservation
+
 ## Unformated 
 Missing no-argument constructor - JPA entities need a default constructor
 Missing setEndDate implementation - the method is empty

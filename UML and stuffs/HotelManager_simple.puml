@@ -1,0 +1,130 @@
+@startuml
+' Goal: 5-minute comprehension diagram (core domain & flows)
+' Keep only essential attributes, key responsibilities, and relationships.
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundCorner 12
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam defaultFontSize 12
+
+skinparam class {
+  BackgroundColor #F8FAFF
+  BorderColor #3F51B5
+  ArrowColor #303F9F
+  FontSize 12
+  AttributeFontSize 11
+}
+skinparam interface {
+  BackgroundColor #F0FFF8
+  BorderColor #00897B
+}
+skinparam enum {
+  BackgroundColor #FFF8E1
+  BorderColor #FFB300
+}
+skinparam legend {
+  BackgroundColor #FAFAFA
+  BorderColor #BDBDBD
+}
+
+' ================= Core Domain =================
+package "Domain" {
+  class Room {
+    + id: Long
+    + type: String
+    + price: Double
+    + available: Boolean
+  }
+
+  class Reservation {
+    + id: Long
+    + customerName: String
+    + checkIn: LocalDate
+    + checkOut: LocalDate
+    + status: ReservationStatus
+  }
+
+  enum ReservationStatus {
+    PENDING
+    CONFIRMED
+    CHECKED_IN
+    CHECKED_OUT
+    CANCELLED
+  }
+
+  Room "1" o-- "*" Reservation : bookings
+}
+
+' ================ Persistence ================
+package "Persistence" {
+  interface RoomRepository {
+    + findAvailableByType(type): List<Room>
+  }
+  interface ReservationRepository {
+    + findActiveByRoom(room): List<Reservation>
+  }
+  RoomRepository .. Room
+  ReservationRepository .. Reservation
+}
+
+' ================ Services ================
+package "Services" {
+  class RoomService {
+    + listAvailable(type?): List<Room>
+    + find(id): Room
+  }
+  class ReservationService {
+    + create(roomType, name, in, out, guests): Reservation
+    + cancel(id)
+    + list(): List<Reservation>
+  }
+  RoomService --> RoomRepository
+  ReservationService --> ReservationRepository
+  ReservationService --> RoomService : room lookup
+}
+
+' ================ Web Layer ================
+package "Web (Controllers)" {
+  class RoomController {
+    + GET /rooms
+    + POST /rooms
+  }
+  class ReservationController {
+    + GET /reservations
+    + POST /reservations
+    + POST /reservations/{id}/cancel
+  }
+  RoomController --> RoomService
+  ReservationController --> ReservationService
+}
+
+' ================ Cross-layer Flow ================
+RoomController -[#888]> Room : view list
+ReservationController -[#888]> Reservation : manage
+
+' High-level lifecycle note
+note right of ReservationService
+create()
+ 1. Find available Room (by type)
+ 2. Validate date range & availability
+ 3. Persist Reservation & update Room state (if needed)
+end note
+
+note bottom of Room
+available = true only if
+no overlapping active reservations
+end note
+
+legend right
+| Element | Meaning |
+| Room / Reservation | Core domain entities |
+| *Repository | Data access (Spring Data) |
+| *Service | Business logic / validation |
+| *Controller | HTTP endpoints |
+endlegend
+
+' Simplification rules: hidden setters/getters, non-critical fields omitted,
+' focus on relationships & primary responsibilities.
+@enduml

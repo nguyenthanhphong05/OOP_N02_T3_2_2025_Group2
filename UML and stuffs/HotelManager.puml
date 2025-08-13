@@ -1,13 +1,106 @@
-@startuml Hotel Management System - UML Class Diagram
+@startuml Hotel Management System - Detailed Architecture
+title Hotel Management System - Main UML (Detailed, Left->Right Layout)
 
-' Title
-title Hotel Management System - UML CLASS
+' Unified left-to-right layout (mirrors simplified UML)
+left to right direction
+skinparam ranksep 40
+skinparam nodesep 30
 
-' Layout direction
-!define DIRECTION top to bottom direction
+' Global styling aligned with simplified diagram
+skinparam backgroundColor #FFFFFF
+skinparam shadowing true
+skinparam roundCorner 14
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam defaultFontSize 12
+skinparam ArrowColor #455A64
+skinparam ArrowThickness 2
+
+skinparam class {
+  BackgroundColor #F8FAFF
+  BorderColor #1A4E89
+  ArrowColor #1A4E89
+  FontSize 12
+  AttributeFontSize 10
+  BorderThickness 2
+}
+
+skinparam interface {
+  BackgroundColor #F0FFF8
+  BorderColor #00897B
+  BorderThickness 2
+}
+
+skinparam enum {
+  BackgroundColor #FFF8E1
+  BorderColor #FFB300
+  BorderThickness 2
+}
+
+skinparam legend {
+  BackgroundColor #FAFAFA
+  BorderColor #BDBDBD
+}
+
+' Package & role stereotypes
+skinparam package<<domain>> {
+  BackgroundColor #E3F2FD
+  BorderColor #1565C0
+  FontColor #0D47A1
+}
+
+skinparam package<<persistence>> {
+  BackgroundColor #FFF4E5
+  BorderColor #EF6C00
+  FontColor #E65100
+}
+
+skinparam package<<services>> {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  FontColor #1B5E20
+}
+
+skinparam package<<web>> {
+  BackgroundColor #F3E5F5
+  BorderColor #7B1FA2
+  FontColor #4A148C
+}
+
+skinparam package<<infra>> {
+  BackgroundColor #ECEFF1
+  BorderColor #607D8B
+  FontColor #37474F
+}
+
+skinparam class<<implemented>> {
+  BackgroundColor #E8F5E8
+  BorderColor #2E7D32
+  BorderThickness 3
+  FontStyle bold
+}
+
+skinparam class<<planned>> {
+  BackgroundColor #FFEBEE
+  BorderColor #C62828
+  BorderThickness 2
+  FontStyle italic
+}
+
+skinparam interface<<implemented>> {
+  BackgroundColor #E3F2FD
+  BorderColor #1565C0
+  BorderThickness 3
+}
+
+skinparam enum<<implemented>> {
+  BackgroundColor #FFF8E1
+  BorderColor #F9A825
+  BorderThickness 2
+}
 
 ' Package definitions
-package "Model Layer" {
+package "Model Layer" <<domain>> {
     class Room <<implemented>> {
         - id: Long
         - roomId: int
@@ -15,147 +108,146 @@ package "Model Layer" {
         - price: Double
         - isAvailable: Boolean
         - description: String
+        - reservations: List<Reservation>
         --
         + Room()
-        + Room(id, type, price, isAvailable, description)
-        + getId(): Long
-        + setId(id: Long): void
-        + getRoomId(): int
-        + setRoomId(roomId: int): void
-        + getType(): String
-        + setType(type: String): void
-        + getPrice(): Double
-        + setPrice(price: Double): void
-        + getIsAvailable(): Boolean
-        + setIsAvailable(isAvailable: Boolean): void
-        + getDescription(): String
-        + setDescription(description: String): void
-        + equals(obj: Object): boolean
-        + hashCode(): int
-        + toString(): String
+        + Room(roomId, type, price, isAvailable, description)
+        --
+        ' Standard getters/setters
+        --
+        + addReservation(reservation: Reservation): void
+        + removeReservation(reservation: Reservation): void
+        + isAvailableForPeriod(checkIn: LocalDate, checkOut: LocalDate): boolean
     }
     
-    class Reservation <<planned>> {
+    class Reservation <<implemented>> {
         - id: Long
-        - roomId: Long
+        - room: Room
         - customerName: String
-        - startDate: String
-        - endDate: String
+        - checkInDate: LocalDate
+        - checkOutDate: LocalDate
+        - numberOfGuests: int
+        - totalPrice: Double
+        - status: ReservationStatus
         --
         + Reservation()
-        + Reservation(id, roomId, customerName, startDate, endDate)
-        + getId(): Long
-        + setId(id: Long): void
-        + getRoomId(): Long
-        + setRoomId(roomId: Long): void
-        + getCustomerName(): String
-        + setCustomerName(customerName: String): void
-        + getStartDate(): String
-        + setStartDate(startDate: String): void
-        + getEndDate(): String
-        + setEndDate(endDate: String): void
-        + equals(obj: Object): boolean
-        + hashCode(): int
-        + toString(): String
+        + Reservation(room, customerName, checkInDate, checkOutDate, numberOfGuests)
+        --
+        ' Standard getters/setters
+        --
+        + getRoomType(): String
+        + calculateTotalPrice(): Double
+        + getDurationInDays(): long
+        + isActive(): boolean
     }
     
-    ' Position models side by side
+    enum ReservationStatus <<implemented>> {
+        PENDING
+        CONFIRMED
+        CHECKED_IN
+        CHECKED_OUT
+        CANCELLED
+        --
+        + getDisplayName(): String
+        + isActive(): boolean
+    }
+    
+    ' Horizontal positioning (model classes side-by-side)
     Room -[hidden]right- Reservation
+    Reservation -[hidden]right- ReservationStatus
 }
 
-package "Repository Layer" {
+package "Repository Layer" <<persistence>> {
     interface RoomRepository <<implemented>> {
         + findAll(): List<Room>
         + findById(id: Long): Optional<Room>
         + save(room: Room): Room
         + deleteById(id: Long): void
-        + findByRoomId(roomId: int): Optional<Room>
         + findByType(type: String): List<Room>
-        + findByIsAvailable(isAvailable: Boolean): List<Room>
+        + findAvailableRoomsByType(type: String): List<Room>
     }
     
-    interface ReservationRepository <<planned>> {
+    interface ReservationRepository <<implemented>> {
         + findAll(): List<Reservation>
         + findById(id: Long): Optional<Reservation>
         + save(reservation: Reservation): Reservation
         + deleteById(id: Long): void
-        + findByRoomId(roomId: Long): List<Reservation>
-        + findByCustomerName(customerName: String): List<Reservation>
-        + findByStartDate(startDate: String): List<Reservation>
-        + findByEndDate(endDate: String): List<Reservation>
+        + findByRoom(room: Room): List<Reservation>
+        + findByStatus(status: ReservationStatus): List<Reservation>
+        + findActiveReservationsForRoom(room: Room): List<Reservation>
     }
     
-    ' Position repositories side by side
+    ' Horizontal positioning
     RoomRepository -[hidden]right- ReservationRepository
 }
 
-package "Service Layer" {
+package "Service Layer" <<services>> {
     class RoomService <<implemented>> {
         - roomRepository: RoomRepository
+        - reservationService: ReservationService
         --
         + findAllRooms(): List<Room>
-        + findRoomById(id: Long): Optional<Room>
         + saveRoom(room: Room): Room
-        + updateRoom(room: Room): Room
-        + deleteRoom(id: Long): void
-        + findByRoomId(roomId: int): Optional<Room>
-        + findByType(type: String): List<Room>
-        + findAvailableRooms(): List<Room>
+        + findAvailableRoomByType(type: String): Optional<Room>
+        + isRoomAvailableForPeriod(roomId: Long, checkIn: LocalDate, checkOut: LocalDate): boolean
     }
     
-    class ReservationService <<planned>> {
+    class ReservationService <<implemented>> {
         - reservationRepository: ReservationRepository
+        - roomService: RoomService
         --
         + findAllReservations(): List<Reservation>
-        + findReservationById(id: Long): Optional<Reservation>
         + saveReservation(reservation: Reservation): Reservation
-        + updateReservation(reservation: Reservation): Reservation
-        + deleteReservation(id: Long): void
-        + findByRoomId(roomId: Long): List<Reservation>
-        + findByCustomerName(customerName: String): List<Reservation>
-        + findByStartDate(startDate: String): List<Reservation>
-        + findByEndDate(endDate: String): List<Reservation>
+        + createReservation(roomType: String, customerName: String, checkIn: LocalDate, checkOut: LocalDate, guests: int): Reservation
+        + validateReservation(reservation: Reservation): boolean
+        + cancelReservation(id: Long): void
+        + checkInReservation(id: Long): void
+        + checkOutReservation(id: Long): void
     }
     
-    ' Position services side by side
+    ' Horizontal positioning for services  
     RoomService -[hidden]right- ReservationService
 }
 
-package "Controller Layer" {
+package "Controller Layer" <<web>> {
     class HomeController <<implemented>> {
         --
         + home(): String
+        + about(): String
     }
     
     class RoomController <<implemented>> {
         - roomService: RoomService
         --
         + listRooms(model: Model): String
-        + saveRoom(room: Room, result: BindingResult, redirectAttributes: RedirectAttributes, model: Model): String
-        + editRoom(id: Long, model: Model, redirectAttributes: RedirectAttributes): String
-        + deleteRoom(id: Long, redirectAttributes: RedirectAttributes): String
-        + updateRoom(room: Room, result: BindingResult, redirectAttributes: RedirectAttributes, model: Model): String
+        + saveRoom(room: Room, ...): String
+        + editRoom(id: Long, ...): String
+        + deleteRoom(id: Long, ...): String
     }
     
-    class ReservationController <<planned>> {
+    class ReservationController <<implemented>> {
         - reservationService: ReservationService
+        - roomService: RoomService
         --
         + listReservations(model: Model): String
-        + saveReservation(reservation: Reservation, result: BindingResult, redirectAttributes: RedirectAttributes, model: Model): String
-        + editReservation(id: Long, model: Model, redirectAttributes: RedirectAttributes): String
-        + deleteReservation(id: Long, redirectAttributes: RedirectAttributes): String
-        + updateReservation(reservation: Reservation, result: BindingResult, redirectAttributes: RedirectAttributes, model: Model): String
+        + saveReservation(roomType: String, customerName: String, ...): String
+        + editReservation(id: Long, ...): String
+        + cancelReservation(id: Long, ...): String
+        + checkInReservation(id: Long, ...): String
+        + checkOutReservation(id: Long, ...): String
     }
     
-    ' Position controllers in a line
+    ' Horizontal positioning for controllers
     HomeController -[hidden]right- RoomController
     RoomController -[hidden]right- ReservationController
 }
 
-package "Database" {
+package "Database" <<infra>> {
     class H2Database <<Database>> {
         + rooms: Table
         + reservations: Table
+        --
+    + Foreign Key: reservations.room_id -> rooms.id
     }
 }
 
@@ -163,104 +255,48 @@ package "Database" {
 ' RELATIONSHIPS & FLOW DIAGRAM
 ' ===============================
 
-' Layer positioning (top to bottom)
-"Model Layer" -[hidden]down- "Repository Layer"
-"Repository Layer" -[hidden]down- "Service Layer"
-"Service Layer" -[hidden]down- "Controller Layer"
+' Package horizontal flow (left→right)
+"Model Layer" -[hidden]right- "Repository Layer"
+"Repository Layer" -[hidden]right- "Service Layer"
+"Service Layer" -[hidden]right- "Controller Layer"
+"Controller Layer" -[hidden]right- "Database"
 
 ' =============================
-' ENTITY RELATIONSHIPS
+' ENTITY RELATIONSHIPS (Bidirectional OOP)
 ' =============================
-Room ||--down-o{ Reservation : "roomId\n(Foreign Key)"
+Room ||--o{ Reservation : "room (OneToMany)"
+Reservation --> ReservationStatus : "status (enum)"
 
 ' =============================
 ' DATA ACCESS RELATIONSHIPS  
 ' =============================
-RoomRepository ||--up-o{ Room : "CRUD Operations"
-ReservationRepository ||--up-o{ Reservation : "CRUD Operations"
+RoomRepository ..> Room : "CRUD Operations"
+ReservationRepository ..> Reservation : "CRUD Operations"
 
 ' =============================
-' SERVICE DEPENDENCIES
+' SERVICE DEPENDENCIES (Cross-Service Integration)
 ' =============================
-RoomService ||--down-o{ RoomRepository : "Data Access"
-ReservationService ||--down-o{ ReservationRepository : "Data Access"
+RoomService --> RoomRepository : "Data Access"
+RoomService --> ReservationService : "Business Logic Integration"
+ReservationService --> ReservationRepository : "Data Access"
+ReservationService --> RoomService : "Room Availability Validation"
 
 ' =============================
 ' CONTROLLER DEPENDENCIES
 ' =============================
-RoomController ||--down-o{ RoomService : "Business Logic"
-ReservationController ||--down-o{ ReservationService : "Business Logic"
+RoomController --> RoomService : "Business Logic"
+ReservationController --> ReservationService : "Primary Service"
+ReservationController --> RoomService : "Room Selection"
 
-' Legend
 legend right
-    |= Color |= Status |
-    | <back:lightblue>Light Blue</back> | Phong (Room components) |
-    | <back:lightcoral>Light Red</back> | Kien (Reservation components) |
+| Stereotype / Color | Meaning |
+| <<domain>> | Domain entities & enums |
+| <<persistence>> | Spring Data repositories |
+| <<services>> | Business logic / orchestration |
+| <<web>> | MVC / REST controllers |
+| <<infra>> | Infrastructure / database |
+| <<implemented>> | Implemented component |
+| <<planned>> | Planned / pending |
 endlegend
-
-' Enhanced Styling for better visual experience
-skinparam backgroundColor #FAFAFA
-skinparam shadowing true
-skinparam roundCorner 15
-skinparam linetype ortho
-
-skinparam class {
-    BackgroundColor lightblue
-    BorderColor darkblue
-    ArrowColor darkblue
-    FontSize 10
-    AttributeFontSize 9
-}
-
-skinparam interface {
-    BackgroundColor lightcyan
-    BorderColor darkblue
-    FontSize 10
-}
-
-skinparam package {
-    BackgroundColor #E8F4FD
-    BorderColor #2E86AB
-    FontColor #2E86AB
-    FontSize 12
-    FontStyle bold
-}
-
-skinparam note {
-    BackgroundColor #E8F8E8
-    BorderColor #4CAF50
-    FontSize 9
-}
-
-skinparam legend {
-    BackgroundColor #FFF3E0
-    BorderColor #FF9800
-}
-
-' Enhanced styling for component status
-skinparam class<<implemented>> {
-    BackgroundColor #E3F2FD
-    BorderColor #1976D2
-    BorderThickness 2
-}
-
-skinparam class<<planned>> {
-    BackgroundColor #FFEBEE
-    BorderColor #800b0bff
-    BorderThickness 2
-    FontColor #ffffffff
-}
-
-skinparam interface<<implemented>> {
-    BackgroundColor #E8F5E8
-    BorderColor #388E3C
-    BorderThickness 2
-}
-
-skinparam interface<<planned>> {
-    BackgroundColor #FFF3E0
-    BorderColor #F57C00
-    BorderThickness 2
-}
 
 @enduml

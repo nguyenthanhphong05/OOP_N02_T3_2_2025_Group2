@@ -45,7 +45,8 @@
 ```
 
 ## UML 
-![Hotel Management UML Diagram](./UML%20and%20stuffs/HotelMUML.svg)
+Update UML Diagram
+Từ procedural -> OOP 
 
 
 ## Diagram 
