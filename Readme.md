@@ -45,7 +45,7 @@
 ```
 
 ## UML 
-![Hotel Management UML Diagram](./UML%20and%20stuffs/HotelMUML.png)
+![Hotel Management UML Diagram](./UML%20and%20stuffs/HotelMUML.svg)
 
 <div align="center">
   <img src="./UML%20and%20stuffs/HotelMUML.png" alt="Hotel Management UML Diagram" width="800">
