@@ -33,20 +33,30 @@
     >> model
         >> Room.java (hoàn thiện)
         >> Reservation.java (hoàn thiện)
+        >> Customer.java (hoàn thiện)
     >> repository
         >> RoomRepository.java
         >> ReservationRepository.java
+        >> CustomerRepository.java
     >> service
         >> RoomService.java
         >> ReservationService.java
+        >> CustomerService.java
     >> controller
         >> RoomController.java
         >> ReservationController.java
+        >> CustomerController.java
         >> HomeController.java (Redirect /rooms at this moment)
     >> resources
-        >> css 
-        >> html
+        >> templates 
+            >> customer-form.html
+            >> customer.html
+            >> rooms.html
+            >> reservations.html
+            >> index.html
     >> test
+> HotelManagementApplication.java
+
 ```
 
 ## UML 
