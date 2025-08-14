@@ -7,7 +7,6 @@ com\g2\hotelm\controller\HomeController.class
 com\g2\hotelm\HotelManagementApplication.class
 com\g2\hotelm\service\RoomService.class
 com\g2\hotelm\controller\RoomController.class
-com\g2\hotelm\config\DataLoader.class
 com\g2\hotelm\model\Reservation.class
 com\g2\hotelm\model\ReservationStatus.class
 com\g2\hotelm\service\ReservationService.class

@@ -101,60 +101,63 @@ skinparam enum<<implemented>> {
 
 ' Package definitions
 package "Model Layer" <<domain>> {
-    class Room <<implemented>> {
-        - id: Long
-        - roomId: int
-        - type: String
-        - price: Double
-        - isAvailable: Boolean
-        - description: String
-        - reservations: List<Reservation>
-        --
-        + Room()
-        + Room(roomId, type, price, isAvailable, description)
-        --
-        ' Standard getters/setters
-        --
-        + addReservation(reservation: Reservation): void
-        + removeReservation(reservation: Reservation): void
-        + isAvailableForPeriod(checkIn: LocalDate, checkOut: LocalDate): boolean
-    }
-    
-    class Reservation <<implemented>> {
-        - id: Long
-        - room: Room
-        - customerName: String
-        - checkInDate: LocalDate
-        - checkOutDate: LocalDate
-        - numberOfGuests: int
-        - totalPrice: Double
-        - status: ReservationStatus
-        --
-        + Reservation()
-        + Reservation(room, customerName, checkInDate, checkOutDate, numberOfGuests)
-        --
-        ' Standard getters/setters
-        --
-        + getRoomType(): String
-        + calculateTotalPrice(): Double
-        + getDurationInDays(): long
-        + isActive(): boolean
-    }
-    
-    enum ReservationStatus <<implemented>> {
-        PENDING
-        CONFIRMED
-        CHECKED_IN
-        CHECKED_OUT
-        CANCELLED
-        --
-        + getDisplayName(): String
-        + isActive(): boolean
-    }
+  class Room <<implemented>> {
+    - id: Long
+    - roomId: int
+    - type: String
+    - price: Double
+    - isAvailable: Boolean
+    - description: String
+    - reservations: List<Reservation>
+    --
+    + Room()
+    + Room(roomId, type, price, isAvailable, description)
+    --
+    ' Standard getters/setters
+    --
+    + addReservation(reservation: Reservation): void
+    + removeReservation(reservation: Reservation): void
+    + isAvailableForPeriod(checkIn: LocalDate, checkOut: LocalDate): boolean
+  }
+
+  class Customer <<implemented>> {
+    - id: Long
+    - fullName: String
+    - email: String
+    - phone: String
+    - idNumber: String
+    - reservations: List<Reservation>
+    --
+    + Customer()
+    + Customer(fullName, email, phone, idNumber)
+    --
+    ' Standard getters/setters
+    --
+    + getTotalReservations(): int
+  }
+
+  class Reservation <<implemented>> {
+    - id: Long
+    - room: Room
+    - customer: Customer
+    - checkInDate: LocalDate
+    - checkOutDate: LocalDate
+    - numberOfGuests: int
+    - totalPrice: Double
+    --
+    + Reservation()
+    + Reservation(room, customer, checkInDate, checkOutDate, numberOfGuests)
+    --
+    ' Standard getters/setters
+    --
+    + getRoomType(): String
+    + calculateTotalPrice(): Double
+    + getDurationInDays(): long
+  }
     
     ' Horizontal positioning (model classes side-by-side)
-    Room -[hidden]right- Reservation
-    Reservation -[hidden]right- ReservationStatus
+  Room -[hidden]right- Reservation
+  Customer -[hidden]right- Reservation
 }
 
 package "Repository Layer" <<persistence>> {
@@ -265,7 +268,7 @@ package "Database" <<infra>> {
 ' ENTITY RELATIONSHIPS (Bidirectional OOP)
 ' =============================
 Room ||--o{ Reservation : "room (OneToMany)"
-Reservation --> ReservationStatus : "status (enum)"
+Customer ||--o{ Reservation : "customer (OneToMany)"
 
 ' =============================
 ' DATA ACCESS RELATIONSHIPS  

@@ -14,9 +14,7 @@ Hệ thống quản lý khách sạn được phát triển bằng **Spring Boot
 - ✅ Quản lý phòng khách sạn (Room Management)
 - ✅ Quản lý đặt phòng (Reservation Management)
 - ✅ Giao diện web thân thiện với Bootstrap 5
-- ✅ RESTful API đầy đủ
 - ✅ Cơ sở dữ liệu H2 tích hợp
-- ✅ Quan hệ bidirectional JPA/Hibernate
 - ✅ Validation và xử lý lỗi toàn diện
 
 ## 🏗️ Kiến trúc hệ thống
@@ -101,7 +99,6 @@ cd OOP_N02_T3_2_2025_Group2/complete
 3. **Truy cập ứng dụng**
 - Web Interface: http://localhost:8080
 - H2 Database Console: http://localhost:8080/h2-console
-- API Endpoints: http://localhost:8080/api/*
 
 ### Database Configuration
 ```properties

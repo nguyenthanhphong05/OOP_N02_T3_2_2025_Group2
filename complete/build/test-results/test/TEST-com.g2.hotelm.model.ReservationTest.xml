@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.g2.hotelm.model.ReservationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-08-13T11:40:07" hostname="DESKTOP-OTQMG1O" time="0.002">
-  <properties/>
-  <testcase name="testGetStartDate()" classname="com.g2.hotelm.model.ReservationTest" time="0.001"/>
-  <testcase name="testGetStartDateWithDifferentFormat()" classname="com.g2.hotelm.model.ReservationTest" time="0.0"/>
-  <testcase name="testGetStartDateAfterSetStartDate()" classname="com.g2.hotelm.model.ReservationTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

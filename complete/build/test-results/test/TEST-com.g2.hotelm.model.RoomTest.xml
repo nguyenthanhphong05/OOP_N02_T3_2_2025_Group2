@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.model.RoomTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-08-14T01:23:18" hostname="DESKTOP-OTQMG1O" time="0.007">
+  <properties/>
+  <testcase name="testToString()" classname="com.g2.hotelm.model.RoomTest" time="0.004"/>
+  <testcase name="testConstructorAndGetters()" classname="com.g2.hotelm.model.RoomTest" time="0.001"/>
+  <testcase name="testSetters()" classname="com.g2.hotelm.model.RoomTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

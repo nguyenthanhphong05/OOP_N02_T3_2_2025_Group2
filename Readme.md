@@ -60,6 +60,8 @@ Từ procedural -> OOP
   - adding H2 db to room model.
   - adding controller - frontend.
   - adding Reservation model, test
+  - adding service layer for Reservation 
+  - Refactor project structure to follow OOP.
 
 ## Fun stuffs 
 Check changelog or Okimstupid.md.

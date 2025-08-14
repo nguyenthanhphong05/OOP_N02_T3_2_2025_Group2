@@ -38,23 +38,23 @@ package "Domain" {
     + available: Boolean
   }
 
-  class Reservation {
+  class Customer {
     + id: Long
-    + customerName: String
-    + checkIn: LocalDate
-    + checkOut: LocalDate
-    + status: ReservationStatus
+    + fullName: String
+    + email: String
+    + phone: String
+    + idNumber: String
   }
 
-  enum ReservationStatus {
-    PENDING
-    CONFIRMED
-    CHECKED_IN
-    CHECKED_OUT
-    CANCELLED
+  class Reservation {
+    + id: Long
+    + customer: Customer
+    + checkIn: LocalDate
+    + checkOut: LocalDate
   }
 
   Room "1" o-- "*" Reservation : bookings
+  Customer "1" o-- "*" Reservation : reservations
 }
 
 ' ================ Persistence ================
@@ -65,8 +65,13 @@ package "Persistence" {
   interface ReservationRepository {
     + findActiveByRoom(room): List<Reservation>
   }
+  interface CustomerRepository {
+    + findByEmail(email): Customer
+    + findAll(): List<Customer>
+  }
   RoomRepository .. Room
   ReservationRepository .. Reservation
+  CustomerRepository .. Customer
 }
 
 ' ================ Services ================
@@ -80,9 +85,16 @@ package "Services" {
     + cancel(id)
     + list(): List<Reservation>
   }
+  class CustomerService {
+    + findByEmail(email): Customer
+    + list(): List<Customer>
+    + save(customer): Customer
+    + delete(id): void
+  }
   RoomService --> RoomRepository
   ReservationService --> ReservationRepository
   ReservationService --> RoomService : room lookup
+  CustomerService --> CustomerRepository
 }
 
 ' ================ Web Layer ================
@@ -96,8 +108,14 @@ package "Web (Controllers)" {
     + POST /reservations
     + POST /reservations/{id}/cancel
   }
+  class CustomerController {
+    + GET /customers
+    + POST /customers
+    + DELETE /customers/{id}
+  }
   RoomController --> RoomService
   ReservationController --> ReservationService
+  CustomerController --> CustomerService
 }
 
 ' ================ Cross-layer Flow ================

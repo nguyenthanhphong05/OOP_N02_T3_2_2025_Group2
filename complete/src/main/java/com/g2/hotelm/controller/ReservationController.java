@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.g2.hotelm.model.Customer;
 import com.g2.hotelm.model.Reservation;
-import com.g2.hotelm.model.ReservationStatus;
 import com.g2.hotelm.model.Room;
 import com.g2.hotelm.service.ReservationService;
 import com.g2.hotelm.service.RoomService;
@@ -37,9 +37,10 @@ public class ReservationController {
     public String listReservations(Model model) {
         List<Reservation> reservations = reservationService.findAllReservations();
         model.addAttribute("reservations", reservations);
-        model.addAttribute("reservation", new Reservation());
+    Reservation formReservation = new Reservation();
+    formReservation.setCustomer(new Customer());
+    model.addAttribute("reservation", formReservation);
         model.addAttribute("rooms", roomService.findAllRooms());
-        model.addAttribute("statuses", ReservationStatus.values());
         return "reservations";
     }
 
@@ -59,6 +60,13 @@ public class ReservationController {
             }
             
             reservation.setRoom(roomOpt.get());
+            // Sanitize customer: if no name provided, drop the association
+            if (reservation.getCustomer() != null) {
+                String name = reservation.getCustomer().getFullName();
+                if (name == null || name.trim().isEmpty()) {
+                    reservation.setCustomer(null);
+                }
+            }
             
             // Calculate total price
             if (reservation.getCheckInDate() != null && reservation.getCheckOutDate() != null) {

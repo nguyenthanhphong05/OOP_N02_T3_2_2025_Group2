@@ -135,25 +135,14 @@ public class Room {
     // Business logic method from UML
     public boolean isAvailableForPeriod(LocalDate checkIn, LocalDate checkOut) {
         return reservations.stream()
-                .filter(reservation -> reservation.getStatus() != ReservationStatus.CANCELLED)
-                .noneMatch(reservation -> 
-                    !(checkOut.isBefore(reservation.getCheckInDate()) || 
-                      checkIn.isAfter(reservation.getCheckOutDate())));
+                .noneMatch(reservation -> {
+                    LocalDate resCheckIn = reservation.getCheckInDate();
+                    LocalDate resCheckOut = reservation.getCheckOutDate();
+                    return !(checkOut.isBefore(resCheckIn) || checkIn.isAfter(resCheckOut));
+                });
     }
 
-@Override
-
-//     public void getRoomDetails() {
-//         System.out.println("Room ID: " + id);
-//         System.out.println("Type: " + type);
-//         System.out.println("Price: $" + price);
-//         System.out.println("Available: " + (isAvailable ? "Yes" : "No"));
-//         System.out.println("Description: " + description);
-//     }
-
-// }
-
-public boolean equals(Object o) {
+    public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Room)) return false;
     Room room = (Room) o;
