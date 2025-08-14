@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.g2.hotelm.model.Customer;
 import com.g2.hotelm.model.Reservation;
 import com.g2.hotelm.model.Room;
+import com.g2.hotelm.service.CustomerService;
 import com.g2.hotelm.service.ReservationService;
 import com.g2.hotelm.service.RoomService;
 
@@ -29,6 +30,9 @@ public class ReservationController {
     
     @Autowired
     private RoomService roomService;
+    
+    @Autowired
+    private CustomerService customerService;
 
     /**
      * Display reservations list page
@@ -37,10 +41,11 @@ public class ReservationController {
     public String listReservations(Model model) {
         List<Reservation> reservations = reservationService.findAllReservations();
         model.addAttribute("reservations", reservations);
-    Reservation formReservation = new Reservation();
-    formReservation.setCustomer(new Customer());
-    model.addAttribute("reservation", formReservation);
+        Reservation formReservation = new Reservation();
+        formReservation.setCustomer(new Customer());
+        model.addAttribute("reservation", formReservation);
         model.addAttribute("rooms", roomService.findAllRooms());
+        model.addAttribute("customers", customerService.findAllCustomers());
         return "reservations";
     }
 
@@ -50,6 +55,7 @@ public class ReservationController {
     @PostMapping("/save")
     public String saveReservation(@ModelAttribute Reservation reservation, 
                                 @RequestParam String roomId,
+                                @RequestParam(required = false) Long customerId,
                                 RedirectAttributes redirectAttributes) {
         try {
             // Get room by roomId (String)
@@ -60,11 +66,30 @@ public class ReservationController {
             }
             
             reservation.setRoom(roomOpt.get());
-            // Sanitize customer: if no name provided, drop the association
-            if (reservation.getCustomer() != null) {
-                String name = reservation.getCustomer().getFullName();
-                if (name == null || name.trim().isEmpty()) {
-                    reservation.setCustomer(null);
+            
+            // Handle customer: either select existing or create new
+            if (customerId != null && customerId > 0) {
+                // Use existing customer
+                Optional<Customer> customerOpt = customerService.findCustomerById(customerId);
+                if (customerOpt.isPresent()) {
+                    reservation.setCustomer(customerOpt.get());
+                } else {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Selected customer not found!");
+                    return "redirect:/reservations";
+                }
+            } else {
+                // Create new customer or drop association if no name
+                if (reservation.getCustomer() != null) {
+                    String name = reservation.getCustomer().getFullName();
+                    String email = reservation.getCustomer().getEmail();
+                    if (name != null && !name.trim().isEmpty() && 
+                        email != null && !email.trim().isEmpty()) {
+                        // Save new customer
+                        Customer newCustomer = customerService.saveCustomer(reservation.getCustomer());
+                        reservation.setCustomer(newCustomer);
+                    } else {
+                        reservation.setCustomer(null);
+                    }
                 }
             }
             

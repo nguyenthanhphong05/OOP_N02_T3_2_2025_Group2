@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.service.CustomerServiceTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:25" hostname="DESKTOP-OTQMG1O" time="0.23">
+  <properties/>
+  <testcase name="testCountCustomers()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.187"/>
+  <testcase name="testDeleteCustomerWithNullId()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.004"/>
+  <testcase name="testFindCustomerById()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.003"/>
+  <testcase name="testCustomerExists()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="testFindCustomerByEmail()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="testSaveCustomerWithNullCustomer()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.004"/>
+  <testcase name="testSaveCustomerWithDuplicateEmail()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="testSearchCustomersByName()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="testSaveCustomer()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.019"/>
+  <testcase name="testDeleteCustomer()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="testFindAllCustomers()" classname="com.g2.hotelm.service.CustomerServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -13,8 +13,10 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
             <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/rooms">Rooms</a>
                 <a class="nav-link active" href="/reservations">Reservations</a>
+                <a class="nav-link" href="/customers">Customers</a>
             </div>
         </nav>
         
@@ -28,8 +30,19 @@
                 <h5 class="card-title">Add New Reservation</h5>
                 <form th:action="@{/reservations/save}" th:object="${reservation}" method="post">
                     <div class="row">
-                        <div class="col-md-3">
-                            <input type="text" th:field="*{customer.fullName}" class="form-control" placeholder="Customer Name" required>
+                        <div class="col-md-2">
+                            <select name="customerId" class="form-control">
+                                <option value="">Select Existing Customer</option>
+                                <option th:each="customer : ${customers}" th:value="${customer.id}" 
+                                        th:text="${customer.fullName + ' (' + customer.email + ')'}"></option>
+                                <option value="0">-- Create New Customer --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{customer.fullName}" class="form-control" placeholder="New Customer Name">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="email" th:field="*{customer.email}" class="form-control" placeholder="Customer Email">
                         </div>
                         <div class="col-md-2">
                             <select name="roomId" class="form-control" required>
@@ -37,10 +50,10 @@
                                 <option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomId + ' - ' + room.type}"></option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <input type="date" th:field="*{checkInDate}" class="form-control" required>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <input type="date" th:field="*{checkOutDate}" class="form-control" required>
                         </div>
                         <div class="col-md-1">

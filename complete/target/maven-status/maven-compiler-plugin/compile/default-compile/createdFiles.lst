@@ -5,8 +5,12 @@ com\g2\hotelm\model\RoomType.class
 com\g2\hotelm\repository\RoomRepository.class
 com\g2\hotelm\controller\HomeController.class
 com\g2\hotelm\HotelManagementApplication.class
+com\g2\hotelm\repository\CustomerRepository.class
+com\g2\hotelm\controller\CustomerController.class
+com\g2\hotelm\model\Customer.class
 com\g2\hotelm\service\RoomService.class
 com\g2\hotelm\controller\RoomController.class
+com\g2\hotelm\service\CustomerService.class
 com\g2\hotelm\model\Reservation.class
 com\g2\hotelm\model\ReservationStatus.class
 com\g2\hotelm\service\ReservationService.class

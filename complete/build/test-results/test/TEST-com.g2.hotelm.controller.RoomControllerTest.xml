@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.controller.RoomControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:24" hostname="DESKTOP-OTQMG1O" time="0.024">
+  <properties/>
+  <testcase name="testListRooms()" classname="com.g2.hotelm.controller.RoomControllerTest" time="0.024"/>
+  <system-out><![CDATA[2025-08-14T13:02:24.248+07:00  INFO 11968 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.controller.RoomControllerTest]: RoomControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-14T13:02:24.254+07:00  INFO 11968 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.controller.RoomControllerTest
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2025-08-14T13:02:24.268+07:00  INFO 11968 --- [    Test worker] c.g.h.controller.RoomControllerTest      : Starting RoomControllerTest using Java 21.0.7 with PID 11968 (started by For Work in E:\OOPG2\OOP_N02_T3_2_2025_Group2\complete)
+2025-08-14T13:02:24.268+07:00  INFO 11968 --- [    Test worker] c.g.h.controller.RoomControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2025-08-14T13:02:24.373+07:00  INFO 11968 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-08-14T13:02:24.408+07:00  INFO 11968 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-08-14T13:02:24.408+07:00  INFO 11968 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-08-14T13:02:24.409+07:00  INFO 11968 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-08-14T13:02:24.412+07:00  INFO 11968 --- [    Test worker] c.g.h.controller.RoomControllerTest      : Started RoomControllerTest in 0.157 seconds (process running for 8.151)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.service.RoomServiceTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:25" hostname="DESKTOP-OTQMG1O" time="0.066">
+  <properties/>
+  <testcase name="testSaveRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.041"/>
+  <testcase name="testFindAllRooms()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.002"/>
+  <testcase name="testUpdateRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <testcase name="testFindAvailableRoomsByDateRange()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.001"/>
+  <testcase name="testIsRoomAvailable()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.003"/>
+  <testcase name="testUpdateRoomWithNullId()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.002"/>
+  <testcase name="testDeleteRoomWithNullId()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.001"/>
+  <testcase name="testFindRoomByRoomId()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.002"/>
+  <testcase name="testUpdateRoomWithNullRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.002"/>
+  <testcase name="testFindRoomById()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.001"/>
+  <testcase name="testDeleteRoom()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.001"/>
+  <testcase name="testFindRoomsByType()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.002"/>
+  <testcase name="testFindAvailableRoomsByType()" classname="com.g2.hotelm.service.RoomServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

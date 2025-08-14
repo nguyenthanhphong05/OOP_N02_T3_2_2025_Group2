@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Customer Management</h1>
+        
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/rooms">Rooms</a>
+                <a class="nav-link" href="/reservations">Reservations</a>
+                <a class="nav-link active" href="/customers">Customers</a>
+            </div>
+        </nav>
+        
+        <!-- Success/Error Messages -->
+        <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+        
+        <!-- Search Form -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="get" th:action="@{/customers}">
+                    <div class="input-group">
+                        <input type="text" name="search" th:value="${search}" class="form-control" 
+                               placeholder="Search customers by name, email, or phone...">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <a href="/customers" class="btn btn-outline-primary">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Add New Customer Form -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Add New Customer</h5>
+                <form th:action="@{/customers/save}" th:object="${customer}" method="post">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="email" th:field="*{email}" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{phone}" class="form-control" placeholder="Phone">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{idNumber}" class="form-control" placeholder="ID Number">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Add Customer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Customer List -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Customer List</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>ID Number</th>
+                            <th>Reservations</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="customer : ${customers}">
+                            <td th:text="${customer.id}"></td>
+                            <td th:text="${customer.fullName}"></td>
+                            <td th:text="${customer.email}"></td>
+                            <td th:text="${customer.phone ?: 'N/A'}"></td>
+                            <td th:text="${customer.idNumber ?: 'N/A'}"></td>
+                            <td th:text="${customer.totalReservations}"></td>
+                            <td>
+                                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <form th:action="@{/customers/delete/{id}(id=${customer.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger" 
+                                            onclick="return confirm('Delete this customer? This will also delete their reservations.')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Empty state -->
+                <div th:if="${#lists.isEmpty(customers)}" class="text-center py-4">
+                    <p class="text-muted">No customers found.</p>
+                    <a href="/customers/new" class="btn btn-primary">Add First Customer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

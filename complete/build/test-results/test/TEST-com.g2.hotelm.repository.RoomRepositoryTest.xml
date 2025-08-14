@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.repository.RoomRepositoryTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:25" hostname="DESKTOP-OTQMG1O" time="0.032">
+  <properties/>
+  <testcase name="testFindByTypeAndIsAvailable()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.007"/>
+  <testcase name="testFindByIsAvailable()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.005"/>
+  <testcase name="testFindByRoomId()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.005"/>
+  <testcase name="testSaveRoom()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.004"/>
+  <testcase name="testFindByType()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.007"/>
+  <testcase name="testFindByRoomIdNotFound()" classname="com.g2.hotelm.repository.RoomRepositoryTest" time="0.003"/>
+  <system-out><![CDATA[2025-08-14T13:02:25.571+07:00  INFO 11968 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.repository.RoomRepositoryTest]: RoomRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-14T13:02:25.575+07:00  INFO 11968 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.repository.RoomRepositoryTest
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.type=? and r1_0.is_available=?
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.is_available=?
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.room_id=?
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.type=?
+Hibernate: select r1_0.id,r1_0.description,r1_0.is_available,r1_0.price,r1_0.room_id,r1_0.type from rooms r1_0 where r1_0.room_id=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

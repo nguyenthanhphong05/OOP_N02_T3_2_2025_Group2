@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.service.ReservationServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:25" hostname="DESKTOP-OTQMG1O" time="0.057">
+  <properties/>
+  <testcase name="testFindReservationById()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.041"/>
+  <testcase name="testSaveReservationWithNullReservation()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testReservationExists()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testSaveReservation()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testDeleteReservationWithNullId()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testIsRoomAvailableForPeriod()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.001"/>
+  <testcase name="testDeleteReservation()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testCountReservations()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.002"/>
+  <testcase name="testFindAllReservations()" classname="com.g2.hotelm.service.ReservationServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

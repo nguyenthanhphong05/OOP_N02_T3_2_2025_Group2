@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.g2.hotelm.repository.ReservationRepositoryTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-08-14T06:02:25" hostname="DESKTOP-OTQMG1O" time="0.118">
+  <properties/>
+  <testcase name="testFindAll()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.056"/>
+  <testcase name="testFindByRoom()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.018"/>
+  <testcase name="testSaveReservation()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.004"/>
+  <testcase name="testFindConflictingReservations()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.008"/>
+  <testcase name="testFindByCustomer_FullName()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.012"/>
+  <testcase name="testCalculateTotalPrice()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.008"/>
+  <testcase name="testFindConflictingReservationsForRoom()" classname="com.g2.hotelm.repository.ReservationRepositoryTest" time="0.007"/>
+  <system-out><![CDATA[2025-08-14T13:02:25.446+07:00  INFO 11968 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.g2.hotelm.repository.ReservationRepositoryTest]: ReservationRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-08-14T13:02:25.450+07:00  INFO 11968 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.g2.hotelm.HotelManagementApplication for test class com.g2.hotelm.repository.ReservationRepositoryTest
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.check_in_date,r1_0.check_out_date,r1_0.customer_id,r1_0.room_id,r1_0.total_price from reservations r1_0
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.check_in_date,r1_0.check_out_date,r1_0.customer_id,r1_0.room_id,r1_0.total_price from reservations r1_0 where r1_0.room_id=?
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.check_in_date,r1_0.check_out_date,r1_0.customer_id,r1_0.room_id,r1_0.total_price from reservations r1_0 where r1_0.check_in_date<=? and r1_0.check_out_date>=?
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.check_in_date,r1_0.check_out_date,r1_0.customer_id,r1_0.room_id,r1_0.total_price from reservations r1_0 left join customer c1_0 on c1_0.id=r1_0.customer_id where c1_0.full_name=?
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: insert into customer (email,full_name,id_number,phone,id) values (?,?,?,?,default)
+Hibernate: insert into rooms (description,is_available,price,room_id,type,id) values (?,?,?,?,?,default)
+Hibernate: insert into reservations (check_in_date,check_out_date,customer_id,room_id,total_price,id) values (?,?,?,?,?,default)
+Hibernate: select r1_0.id,r1_0.check_in_date,r1_0.check_out_date,r1_0.customer_id,r1_0.room_id,r1_0.total_price from reservations r1_0 where r1_0.room_id=? and r1_0.check_in_date<=? and r1_0.check_out_date>=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
