@@ -63,18 +63,19 @@ Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelM
 
 
 ## UML 
-SVG for better readabilty
-[Base UML Diagram](OOP_N02_T3_2_2025_Group2/UML%20and%20stuffs/HotelMUMLbase.svg)
-[Full UML Diagram](OOP_N02_T3_2_2025_Group2/UML%20and%20stuffs/HotelUMLL.svg)
 
-[Base UML Diagram2](OOP_N02_T3_2_2025_Group2/UML%20and%20stuffs/HotelMUMLbase.png)
-[Full UML Diagram2](OOP_N02_T3_2_2025_Group2/UML%20and%20stuffs/HotelUMLL.png)
+### Class Diagrams
+
+**Base UML Diagram**
+![Base UML Diagram](UML%20and%20stuffs/HotelMUMLbase.svg)
+
+**Full UML Diagram**
+![Full UML Diagram](UML%20and%20stuffs/HotelUMLL.svg)
 
 
+## Activity Diagrams
 
-## Acitivy Diagram 
-Path
-OOP_N02_T3_2_2025_Group2\UML and stuffs
+Các activity diagrams được lưu trong thư mục: `UML and stuffs`
 
 ## Change log 
   - adding H2 db to room model.
