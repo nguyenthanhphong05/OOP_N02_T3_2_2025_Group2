@@ -2,7 +2,7 @@
 * Để phù hợp với yêu cầu đề bài, nhóm 2 quyết định làm lại toàn bộ project
 *Toàn bộ lịch sử commit - changlog vẫn đươc lưu ở branch "old"*
 - Những thay đổi chính trong project bao gồm: 
-- Sử dụng 2 model: Room và Booking thay vì 3 model 
+- Sử dụng 3 model
 - Sử dụng java Springboot framework 
 - Sử dụng H2 làm cơ sở dữ liệu (JPA)
 
