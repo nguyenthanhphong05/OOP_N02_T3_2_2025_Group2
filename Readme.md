@@ -46,7 +46,7 @@
         >> RoomController.java
         >> ReservationController.java
         >> CustomerController.java
-        >> HomeController.java (Redirect /rooms at this moment)
+        >> MainController.java (Redirect /rooms at this moment)
     >> resources
         >> templates 
             >> customer-form.html
@@ -57,7 +57,10 @@
     >> test
 > HotelManagementApplication.java
 
+
 ```
+Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelManagementApplication.java
+
 
 ## UML 
 Update UML Diagram
