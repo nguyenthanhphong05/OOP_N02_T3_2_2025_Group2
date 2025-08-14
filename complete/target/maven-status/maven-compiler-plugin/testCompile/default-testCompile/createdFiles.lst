@@ -1,2 +1,14 @@
 com\g2\hotelm\model\CustomerTest.class
+com\g2\hotelm\repository\CustomerRepositoryTest.class
+com\g2\hotelm\HotelManagementApplicationTest.class
+com\g2\hotelm\service\CustomerServiceTest.class
 com\g2\hotelm\model\RoomTest.class
+com\g2\hotelm\repository\ReservationRepositoryTest.class
+com\g2\hotelm\service\ReservationServiceTest.class
+com\g2\hotelm\service\RoomServiceTest.class
+com\g2\hotelm\controller\HomeControllerTest.class
+com\g2\hotelm\controller\CustomerControllerTest.class
+com\g2\hotelm\controller\ReservationControllerTest.class
+com\g2\hotelm\model\RoomTypeTest.class
+com\g2\hotelm\repository\RoomRepositoryTest.class
+com\g2\hotelm\controller\RoomControllerTest.class

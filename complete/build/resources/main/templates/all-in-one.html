@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System - All in One</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --customers-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --rooms-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --reservations-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #f8f9fa !important;
+            transform: translateY(-1px);
+            transition: all 0.3s ease;
+        }
+
+        .section-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            padding: 1.5rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .section-content {
+            background: white;
+            padding: 2rem;
+        }
+
+        .customers-section .section-header {
+            background: var(--customers-gradient);
+        }
+
+        .rooms-section .section-header {
+            background: var(--rooms-gradient);
+        }
+
+        .reservations-section .section-header {
+            background: var(--reservations-gradient);
+        }
+
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-weight: 500;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            border: none;
+        }
+
+        .btn-close {
+            filter: invert(1);
+        }
+
+        .alert {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 25px;
+            margin: 0 5px;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-lg {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-select {
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            padding: 10px 15px;
+        }
+
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-hotel me-2"></i>Hotel Management System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#customers-section">
+                            <i class="fas fa-users me-1"></i>Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rooms-section">
+                            <i class="fas fa-bed me-1"></i>Rooms
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reservations-section">
+                            <i class="fas fa-calendar-check me-1"></i>Reservations
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <!-- Hero Stats Section -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-users icon-lg text-warning"></i>
+                    <h4 id="totalCustomers">0</h4>
+                    <p class="mb-0">Total Customers</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-bed icon-lg text-info"></i>
+                    <h4 id="totalRooms">0</h4>
+                    <p class="mb-0">Total Rooms</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-calendar-check icon-lg text-success"></i>
+                    <h4 id="totalReservations">0</h4>
+                    <p class="mb-0">Active Reservations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customers Section -->
+        <section id="customers-section" class="section-card customers-section">
+            <div class="section-header">
+                <h2><i class="fas fa-users me-2"></i>Customer Management</h2>
+                <p class="mb-0">Manage hotel guests and customer information</p>
+            </div>
+            <div class="section-content">
+                <!-- Customer Search and Add Form -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="customerSearch" placeholder="Search customers...">
+                            <button class="btn btn-outline-custom" type="button" onclick="searchCustomers()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-gradient" onclick="showAddCustomerModal()">
+                            <i class="fas fa-plus me-2"></i>Add New Customer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" id="customersTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>ID Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                            <!-- Customers will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Section -->
+        <section id="rooms-section" class="section-card rooms-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bed me-2"></i>Room Management</h2>
+                <p class="mb-0">Manage hotel rooms, types, and availability</p>
+            </div>
+            <div class="section-content">
+                <!-- Room Add Form -->
+                <div class="row mb-4">
+                    <div class="col-md-12 text-end">
+                        <button class="btn btn-gradient" onclick="showAddRoomModal()">
+                            <i class="fas fa-plus me-2"></i>Add New Room
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rooms Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" id="roomsTable">
+                        <thead>
+                            <tr>
+                                <th>Room ID</th>
+                                <th>Type</th>
+                                <th>Price/Night</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomsTableBody">
+                            <!-- Rooms will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <section id="reservations-section" class="section-card reservations-section">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar-check me-2"></i>Reservation Management</h2>
+                <p class="mb-0">Manage hotel bookings and check-ins</p>
+            </div>
+            <div class="section-content">
+                <!-- Reservation Add Form -->
+                <div class="row mb-4">
+                    <div class="col-md-12 text-end">
+                        <button class="btn btn-gradient" onclick="showAddReservationModal()">
+                            <i class="fas fa-plus me-2"></i>New Reservation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reservations Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" id="reservationsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Room</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Nights</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservationsTableBody">
+                            <!-- Reservations will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Customer Modal -->
+    <div class="modal fade" id="customerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerModalTitle">Add New Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="customerForm">
+                        <input type="hidden" id="customerId">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="customerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerEmail" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="customerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerPhone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="customerPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerIdNumber" class="form-label">ID Number</label>
+                            <input type="text" class="form-control" id="customerIdNumber">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-gradient" onclick="saveCustomer()">Save Customer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Modal -->
+    <div class="modal fade" id="roomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roomModalTitle">Add New Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="roomForm">
+                        <input type="hidden" id="roomIdHidden">
+                        <div class="mb-3">
+                            <label for="roomNumber" class="form-label">Room Number *</label>
+                            <input type="text" class="form-control" id="roomNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roomType" class="form-label">Room Type *</label>
+                            <select class="form-select" id="roomType" required>
+                                <option value="">Select Room Type</option>
+                                <option value="SINGLE">Single</option>
+                                <option value="DOUBLE">Double</option>
+                                <option value="TRIPLE">Triple</option>
+                                <option value="QUAD">Quad</option>
+                                <option value="SUITE">Suite</option>
+                                <option value="DELUXE">Deluxe</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roomPrice" class="form-label">Price per Night *</label>
+                            <input type="number" class="form-control" id="roomPrice" step="0.01" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roomDescription" class="form-label">Description *</label>
+                            <textarea class="form-control" id="roomDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="roomAvailable" checked>
+                                <label class="form-check-label" for="roomAvailable">
+                                    Available
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-gradient" onclick="saveRoom()">Save Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div class="modal fade" id="reservationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reservationModalTitle">New Reservation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reservationForm">
+                        <input type="hidden" id="reservationId">
+                        
+                        <!-- Customer Selection -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Customer Selection</label>
+                                <select class="form-select" id="existingCustomer" onchange="toggleCustomerForm()">
+                                    <option value="">Select Existing Customer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">&nbsp;</label>
+                                <div>
+                                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="toggleNewCustomerForm()">
+                                        <i class="fas fa-plus me-1"></i>Add New Customer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Customer Form (hidden by default) -->
+                        <div id="newCustomerForm" style="display: none;">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h6 class="mb-0">New Customer Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="newCustomerName" class="form-label">Full Name *</label>
+                                                <input type="text" class="form-control" id="newCustomerName">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="newCustomerEmail" class="form-label">Email *</label>
+                                                <input type="email" class="form-control" id="newCustomerEmail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="newCustomerPhone" class="form-label">Phone</label>
+                                                <input type="text" class="form-control" id="newCustomerPhone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="newCustomerIdNumber" class="form-label">ID Number</label>
+                                                <input type="text" class="form-control" id="newCustomerIdNumber">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Room and Dates -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="reservationRoom" class="form-label">Room *</label>
+                                <select class="form-select" id="reservationRoom" required onchange="updatePricePreview()">
+                                    <option value="">Select Room</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="checkInDate" class="form-label">Check-in Date *</label>
+                                <input type="date" class="form-control" id="checkInDate" required onchange="updatePricePreview()">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="checkOutDate" class="form-label">Check-out Date *</label>
+                                <input type="date" class="form-control" id="checkOutDate" required onchange="updatePricePreview()">
+                            </div>
+                        </div>
+
+                        <!-- Price Preview -->
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-3">
+                                                <strong>Nights: <span id="previewNights">0</span></strong>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <strong>Price/Night: $<span id="previewPricePerNight">0</span></strong>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <strong>Total: $<span id="previewTotal">0</span></strong>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <span id="roomAvailabilityStatus" class="badge"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-gradient" onclick="saveReservation()">Save Reservation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Global variables
+        let customers = [];
+        let rooms = [];
+        let reservations = [];
+        let editingCustomer = null;
+        let editingRoom = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+            setupEventListeners();
+            setMinDate();
+        });
+
+        function setupEventListeners() {
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Customer search on Enter key
+            document.getElementById('customerSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCustomers();
+                }
+            });
+        }
+
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkInDate').min = today;
+            document.getElementById('checkOutDate').min = today;
+        }
+
+        // Load all data
+        async function loadAllData() {
+            await Promise.all([
+                loadCustomers(),
+                loadRooms(),
+                loadReservations()
+            ]);
+            updateStats();
+        }
+
+        // Customer functions
+        async function loadCustomers() {
+            try {
+                const response = await fetch('/api/customers');
+                customers = await response.json();
+                displayCustomers(customers);
+                populateCustomerSelect();
+            } catch (error) {
+                console.error('Error loading customers:', error);
+                showAlert('Error loading customers', 'danger');
+            }
+        }
+
+        function displayCustomers(customerList) {
+            const tbody = document.getElementById('customersTableBody');
+            tbody.innerHTML = customerList.map(customer => `
+                <tr>
+                    <td>${customer.id}</td>
+                    <td>${customer.fullName || customer.name || ''}</td>
+                    <td>${customer.email || ''}</td>
+                    <td>${customer.phone || ''}</td>
+                    <td>${customer.idNumber || ''}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editCustomer(${customer.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteCustomer(${customer.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function searchCustomers() {
+            const search = document.getElementById('customerSearch').value.toLowerCase();
+            if (!search) {
+                displayCustomers(customers);
+                return;
+            }
+            
+            const filtered = customers.filter(customer => 
+                (customer.fullName || customer.name || '').toLowerCase().includes(search) ||
+                (customer.email || '').toLowerCase().includes(search) ||
+                (customer.phone || '').toLowerCase().includes(search) ||
+                (customer.idNumber || '').toLowerCase().includes(search)
+            );
+            displayCustomers(filtered);
+        }
+
+        function showAddCustomerModal() {
+            editingCustomer = null;
+            document.getElementById('customerModalTitle').textContent = 'Add New Customer';
+            document.getElementById('customerForm').reset();
+            document.getElementById('customerId').value = '';
+            new bootstrap.Modal(document.getElementById('customerModal')).show();
+        }
+
+        function editCustomer(id) {
+            editingCustomer = customers.find(c => c.id === id);
+            if (!editingCustomer) return;
+
+            document.getElementById('customerModalTitle').textContent = 'Edit Customer';
+            document.getElementById('customerId').value = editingCustomer.id;
+            document.getElementById('customerName').value = editingCustomer.fullName || editingCustomer.name || '';
+            document.getElementById('customerEmail').value = editingCustomer.email || '';
+            document.getElementById('customerPhone').value = editingCustomer.phone || '';
+            document.getElementById('customerIdNumber').value = editingCustomer.idNumber || '';
+            
+            new bootstrap.Modal(document.getElementById('customerModal')).show();
+        }
+
+        async function saveCustomer() {
+            const form = document.getElementById('customerForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const customerData = {
+                fullName: document.getElementById('customerName').value,
+                email: document.getElementById('customerEmail').value,
+                phone: document.getElementById('customerPhone').value,
+                idNumber: document.getElementById('customerIdNumber').value
+            };
+
+            try {
+                let response;
+                if (editingCustomer) {
+                    customerData.id = editingCustomer.id;
+                    response = await fetch(`/customers/update/${editingCustomer.id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(customerData)
+                    });
+                } else {
+                    response = await fetch('/customers/save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(customerData)
+                    });
+                }
+
+                if (response.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('customerModal')).hide();
+                    showAlert('Customer saved successfully!', 'success');
+                    await loadCustomers();
+                } else {
+                    showAlert('Error saving customer', 'danger');
+                }
+            } catch (error) {
+                console.error('Error saving customer:', error);
+                showAlert('Error saving customer', 'danger');
+            }
+        }
+
+        async function deleteCustomer(id) {
+            if (!confirm('Are you sure you want to delete this customer?')) return;
+
+            try {
+                const response = await fetch(`/customers/delete/${id}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    showAlert('Customer deleted successfully!', 'success');
+                    await loadCustomers();
+                } else {
+                    showAlert('Error deleting customer', 'danger');
+                }
+            } catch (error) {
+                console.error('Error deleting customer:', error);
+                showAlert('Error deleting customer', 'danger');
+            }
+        }
+
+        // Room functions
+        async function loadRooms() {
+            try {
+                const response = await fetch('/api/rooms');
+                rooms = await response.json();
+                displayRooms(rooms);
+                populateRoomSelect();
+            } catch (error) {
+                console.error('Error loading rooms:', error);
+                showAlert('Error loading rooms', 'danger');
+            }
+        }
+
+        function displayRooms(roomList) {
+            const tbody = document.getElementById('roomsTableBody');
+            tbody.innerHTML = roomList.map(room => `
+                <tr>
+                    <td>${room.roomId || room.roomNumber || ''}</td>
+                    <td><span class="badge bg-secondary">${room.type || ''}</span></td>
+                    <td>$${(room.price || room.pricePerNight || 0).toFixed(2)}</td>
+                    <td>
+                        <span class="badge ${(room.isAvailable || room.available) ? 'bg-success' : 'bg-danger'}">
+                            ${(room.isAvailable || room.available) ? 'Available' : 'Occupied'}
+                        </span>
+                    </td>
+                    <td>${room.description || ''}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editRoom(${room.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteRoom(${room.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showAddRoomModal() {
+            editingRoom = null;
+            document.getElementById('roomModalTitle').textContent = 'Add New Room';
+            document.getElementById('roomForm').reset();
+            document.getElementById('roomIdHidden').value = '';
+            document.getElementById('roomAvailable').checked = true;
+            new bootstrap.Modal(document.getElementById('roomModal')).show();
+        }
+
+        function editRoom(id) {
+            editingRoom = rooms.find(r => r.id === id);
+            if (!editingRoom) return;
+
+            document.getElementById('roomModalTitle').textContent = 'Edit Room';
+            document.getElementById('roomIdHidden').value = editingRoom.id;
+            document.getElementById('roomNumber').value = editingRoom.roomId || editingRoom.roomNumber || '';
+            document.getElementById('roomType').value = editingRoom.type || '';
+            document.getElementById('roomPrice').value = editingRoom.price || editingRoom.pricePerNight || 0;
+            document.getElementById('roomDescription').value = editingRoom.description || '';
+            document.getElementById('roomAvailable').checked = editingRoom.isAvailable || editingRoom.available || false;
+            
+            new bootstrap.Modal(document.getElementById('roomModal')).show();
+        }
+
+        async function saveRoom() {
+            const form = document.getElementById('roomForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const roomData = {
+                roomId: document.getElementById('roomNumber').value,
+                type: document.getElementById('roomType').value,
+                price: document.getElementById('roomPrice').value,
+                description: document.getElementById('roomDescription').value,
+                isAvailable: document.getElementById('roomAvailable').checked
+            };
+
+            try {
+                let response;
+                if (editingRoom) {
+                    roomData.id = editingRoom.id;
+                    response = await fetch('/rooms/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(roomData)
+                    });
+                } else {
+                    response = await fetch('/rooms/save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(roomData)
+                    });
+                }
+
+                if (response.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('roomModal')).hide();
+                    showAlert('Room saved successfully!', 'success');
+                    await loadRooms();
+                } else {
+                    showAlert('Error saving room', 'danger');
+                }
+            } catch (error) {
+                console.error('Error saving room:', error);
+                showAlert('Error saving room', 'danger');
+            }
+        }
+
+        async function deleteRoom(id) {
+            if (!confirm('Are you sure you want to delete this room?')) return;
+
+            try {
+                const response = await fetch(`/rooms/delete/${id}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    showAlert('Room deleted successfully!', 'success');
+                    await loadRooms();
+                } else {
+                    showAlert('Error deleting room', 'danger');
+                }
+            } catch (error) {
+                console.error('Error deleting room:', error);
+                showAlert('Error deleting room', 'danger');
+            }
+        }
+
+        // Reservation functions
+        async function loadReservations() {
+            try {
+                const response = await fetch('/api/reservations');
+                reservations = await response.json();
+                displayReservations(reservations);
+            } catch (error) {
+                console.error('Error loading reservations:', error);
+                showAlert('Error loading reservations', 'danger');
+            }
+        }
+
+        function displayReservations(reservationList) {
+            const tbody = document.getElementById('reservationsTableBody');
+            tbody.innerHTML = reservationList.map(reservation => {
+                const customer = reservation.customer || {};
+                const room = reservation.room || {};
+                const checkIn = new Date(reservation.checkInDate);
+                const checkOut = new Date(reservation.checkOutDate);
+                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                
+                return `
+                    <tr>
+                        <td>${reservation.id}</td>
+                        <td>${customer.fullName || customer.name || 'N/A'}</td>
+                        <td>${room.roomId || room.roomNumber || 'N/A'}</td>
+                        <td>${reservation.checkInDate || ''}</td>
+                        <td>${reservation.checkOutDate || ''}</td>
+                        <td>${nights}</td>
+                        <td>$${(reservation.totalPrice || 0).toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteReservation(${reservation.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function showAddReservationModal() {
+            document.getElementById('reservationModalTitle').textContent = 'New Reservation';
+            document.getElementById('reservationForm').reset();
+            document.getElementById('reservationId').value = '';
+            document.getElementById('newCustomerForm').style.display = 'none';
+            populateCustomerSelect();
+            populateRoomSelect();
+            updatePricePreview();
+            new bootstrap.Modal(document.getElementById('reservationModal')).show();
+        }
+
+        function populateCustomerSelect() {
+            const select = document.getElementById('existingCustomer');
+            select.innerHTML = '<option value="">Select Existing Customer</option>';
+            customers.forEach(customer => {
+                const option = document.createElement('option');
+                option.value = customer.id;
+                option.textContent = `${customer.fullName || customer.name || ''} - ${customer.email || ''}`;
+                select.appendChild(option);
+            });
+        }
+
+        function populateRoomSelect() {
+            const select = document.getElementById('reservationRoom');
+            select.innerHTML = '<option value="">Select Room</option>';
+            rooms.filter(room => room.isAvailable || room.available).forEach(room => {
+                const option = document.createElement('option');
+                option.value = room.roomId || room.roomNumber;
+                option.textContent = `${room.roomId || room.roomNumber} - ${room.type} ($${(room.price || room.pricePerNight || 0).toFixed(2)}/night)`;
+                select.appendChild(option);
+            });
+        }
+
+        function toggleCustomerForm() {
+            const existingCustomer = document.getElementById('existingCustomer').value;
+            const newCustomerForm = document.getElementById('newCustomerForm');
+            
+            if (existingCustomer) {
+                newCustomerForm.style.display = 'none';
+            }
+        }
+
+        function toggleNewCustomerForm() {
+            const newCustomerForm = document.getElementById('newCustomerForm');
+            const isVisible = newCustomerForm.style.display !== 'none';
+            
+            if (isVisible) {
+                newCustomerForm.style.display = 'none';
+                document.getElementById('existingCustomer').disabled = false;
+            } else {
+                newCustomerForm.style.display = 'block';
+                document.getElementById('existingCustomer').value = '';
+                document.getElementById('existingCustomer').disabled = true;
+            }
+        }
+
+        function updatePricePreview() {
+            const roomId = document.getElementById('reservationRoom').value;
+            const checkIn = document.getElementById('checkInDate').value;
+            const checkOut = document.getElementById('checkOutDate').value;
+
+            if (!roomId || !checkIn || !checkOut) {
+                document.getElementById('previewNights').textContent = '0';
+                document.getElementById('previewPricePerNight').textContent = '0';
+                document.getElementById('previewTotal').textContent = '0';
+                document.getElementById('roomAvailabilityStatus').textContent = '';
+                return;
+            }
+
+            const room = rooms.find(r => (r.roomId || r.roomNumber) === roomId);
+            if (!room) return;
+
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+            const pricePerNight = room.price || room.pricePerNight || 0;
+            const total = nights * pricePerNight;
+
+            document.getElementById('previewNights').textContent = nights;
+            document.getElementById('previewPricePerNight').textContent = pricePerNight.toFixed(2);
+            document.getElementById('previewTotal').textContent = total.toFixed(2);
+
+            // Check availability
+            const statusElement = document.getElementById('roomAvailabilityStatus');
+            if (room.isAvailable || room.available) {
+                statusElement.textContent = 'Available';
+                statusElement.className = 'badge bg-success';
+            } else {
+                statusElement.textContent = 'Not Available';
+                statusElement.className = 'badge bg-danger';
+            }
+        }
+
+        async function saveReservation() {
+            const form = document.getElementById('reservationForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const roomId = document.getElementById('reservationRoom').value;
+            const checkInDate = document.getElementById('checkInDate').value;
+            const checkOutDate = document.getElementById('checkOutDate').value;
+            const existingCustomerId = document.getElementById('existingCustomer').value;
+
+            if (!roomId || !checkInDate || !checkOutDate) {
+                showAlert('Please fill all required fields', 'warning');
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('roomId', roomId);
+            formData.append('checkInDate', checkInDate);
+            formData.append('checkOutDate', checkOutDate);
+
+            // Handle customer
+            if (existingCustomerId) {
+                formData.append('customerId', existingCustomerId);
+            } else {
+                // New customer
+                const name = document.getElementById('newCustomerName').value;
+                const email = document.getElementById('newCustomerEmail').value;
+                const phone = document.getElementById('newCustomerPhone').value;
+                const idNumber = document.getElementById('newCustomerIdNumber').value;
+
+                if (name && email) {
+                    formData.append('customer.fullName', name);
+                    formData.append('customer.email', email);
+                    formData.append('customer.phone', phone);
+                    formData.append('customer.idNumber', idNumber);
+                }
+            }
+
+            try {
+                const response = await fetch('/reservations/save', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('reservationModal')).hide();
+                    showAlert('Reservation created successfully!', 'success');
+                    await loadAllData();
+                } else {
+                    showAlert('Error creating reservation', 'danger');
+                }
+            } catch (error) {
+                console.error('Error saving reservation:', error);
+                showAlert('Error creating reservation', 'danger');
+            }
+        }
+
+        async function deleteReservation(id) {
+            if (!confirm('Are you sure you want to delete this reservation?')) return;
+
+            try {
+                const response = await fetch(`/reservations/delete/${id}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    showAlert('Reservation deleted successfully!', 'success');
+                    await loadReservations();
+                    updateStats();
+                } else {
+                    showAlert('Error deleting reservation', 'danger');
+                }
+            } catch (error) {
+                console.error('Error deleting reservation:', error);
+                showAlert('Error deleting reservation', 'danger');
+            }
+        }
+
+        // Utility functions
+        function updateStats() {
+            document.getElementById('totalCustomers').textContent = customers.length;
+            document.getElementById('totalRooms').textContent = rooms.length;
+            document.getElementById('totalReservations').textContent = reservations.length;
+        }
+
+        function showAlert(message, type) {
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+
+            document.body.appendChild(alertDiv);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

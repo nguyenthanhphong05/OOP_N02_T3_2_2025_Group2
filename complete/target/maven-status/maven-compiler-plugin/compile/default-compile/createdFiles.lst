@@ -12,5 +12,5 @@ com\g2\hotelm\service\RoomService.class
 com\g2\hotelm\controller\RoomController.class
 com\g2\hotelm\service\CustomerService.class
 com\g2\hotelm\model\Reservation.class
-com\g2\hotelm\model\ReservationStatus.class
 com\g2\hotelm\service\ReservationService.class
+com\g2\hotelm\controller\UMLController.class

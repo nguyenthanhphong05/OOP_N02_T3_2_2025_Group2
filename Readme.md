@@ -26,7 +26,7 @@
 - Thiết kế Frontend với Bootstrap
 
 ## Project Construction
-- Đang trong quá trình sửa lại cấu trúc theo dạng OOP thay vì data centric.
+
 ```
 > data 
 >> src 
@@ -63,11 +63,13 @@ Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelM
 
 
 ## UML 
-Update UML Diagram
-Từ procedural -> OOP 
+[Base UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelMUMLbase.svg)
+[Full UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelUMLL.svg)
 
 
-## Diagram 
+## Acitivy Diagram 
+Path
+OOP_N02_T3_2_2025_Group2\UML and stuffs
 
 ## Change log 
   - adding H2 db to room model.

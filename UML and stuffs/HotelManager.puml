@@ -1,10 +1,11 @@
 @startuml Hotel Management System - Detailed Architecture
-title Hotel Management System - Main UML (Detailed, Left->Right Layout)
+!theme materia-outline
+title Hotel Management System - Main UML
 
 ' Unified left-to-right layout (mirrors simplified UML)
 left to right direction
 skinparam ranksep 40
-skinparam nodesep 30
+skinparam nodesep 15
 
 ' Global styling aligned with simplified diagram
 skinparam backgroundColor #FFFFFF
@@ -12,7 +13,7 @@ skinparam shadowing true
 skinparam roundCorner 14
 skinparam linetype ortho
 skinparam packageStyle rectangle
-skinparam defaultFontSize 12
+skinparam defaultFontSize 15
 skinparam ArrowColor #455A64
 skinparam ArrowThickness 2
 
@@ -20,21 +21,21 @@ skinparam class {
   BackgroundColor #F8FAFF
   BorderColor #1A4E89
   ArrowColor #1A4E89
-  FontSize 12
-  AttributeFontSize 10
-  BorderThickness 2
+  FontSize 15
+  AttributeFontSize 14
+  BorderThickness 5
 }
 
 skinparam interface {
   BackgroundColor #F0FFF8
   BorderColor #00897B
-  BorderThickness 2
+  BorderThickness 5
 }
 
 skinparam enum {
   BackgroundColor #FFF8E1
   BorderColor #FFB300
-  BorderThickness 2
+  BorderThickness 5
 }
 
 skinparam legend {
@@ -245,14 +246,6 @@ package "Controller Layer" <<web>> {
     RoomController -[hidden]right- ReservationController
 }
 
-package "Database" <<infra>> {
-    class H2Database <<Database>> {
-        + rooms: Table
-        + reservations: Table
-        --
-    + Foreign Key: reservations.room_id -> rooms.id
-    }
-}
 
 ' ===============================
 ' RELATIONSHIPS & FLOW DIAGRAM
@@ -291,15 +284,5 @@ RoomController --> RoomService : "Business Logic"
 ReservationController --> ReservationService : "Primary Service"
 ReservationController --> RoomService : "Room Selection"
 
-legend right
-| Stereotype / Color | Meaning |
-| <<domain>> | Domain entities & enums |
-| <<persistence>> | Spring Data repositories |
-| <<services>> | Business logic / orchestration |
-| <<web>> | MVC / REST controllers |
-| <<infra>> | Infrastructure / database |
-| <<implemented>> | Implemented component |
-| <<planned>> | Planned / pending |
-endlegend
 
 @enduml
