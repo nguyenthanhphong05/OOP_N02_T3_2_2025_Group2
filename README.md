@@ -1,3 +1,6 @@
+## Link Preview
+http://ec2-3-24-255-157.ap-southeast-2.compute.amazonaws.com:8080/
+
 ## Group 2 - Hotel Manager
 * Để phù hợp với yêu cầu đề bài, nhóm 2 quyết định làm lại toàn bộ project
 *Toàn bộ lịch sử commit - changlog vẫn đươc lưu ở branch "old"*
