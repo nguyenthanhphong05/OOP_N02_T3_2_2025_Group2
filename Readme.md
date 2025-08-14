@@ -63,13 +63,34 @@ Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelM
 
 
 ## UML 
-[Base UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelMUMLbase.svg)
-[Full UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelUMLL.svg)
+
+### Class Diagrams
+
+**Base UML Diagram**
+![Base UML Diagram](UML%20and%20stuffs/HotelMUMLbase.svg)
+
+**Full UML Diagram**
+![Full UML Diagram](UML%20and%20stuffs/HotelUMLL.svg)
 
 
-## Acitivy Diagram 
-Path
-OOP_N02_T3_2_2025_Group2\UML and stuffs
+## Activity Diagrams
+
+Các activity diagrams được lưu trong thư mục: `UML and stuffs`
+
+## Về Ứng dụng
+
+Ứng dụng Quản lý Khách sạn được xây dựng với mục tiêu cung cấp một hệ thống quản lý phòng và đặt phòng hiệu quả. 
+Ứng dụng cho phép người dùng thực hiện các chức năng như:
+
+- Quản lý thông tin khách hàng
+- Quản lý phòng
+- Đặt phòng
+- Kiểm tra tình trạng phòng
+
+![Dashboard SS](UML%20and%20stuffs/DashboardSS.png)
+
+Video Demo.
+[Video](https://www.youtube.com/watch?v=a5xWk52TUK0)
 
 ## Change log 
   - adding H2 db to room model.
