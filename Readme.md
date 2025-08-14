@@ -33,21 +33,34 @@
     >> model
         >> Room.java (hoàn thiện)
         >> Reservation.java (hoàn thiện)
+        >> Customer.java (hoàn thiện)
     >> repository
         >> RoomRepository.java
         >> ReservationRepository.java
+        >> CustomerRepository.java
     >> service
         >> RoomService.java
         >> ReservationService.java
+        >> CustomerService.java
     >> controller
         >> RoomController.java
         >> ReservationController.java
-        >> HomeController.java (Redirect /rooms at this moment)
+        >> CustomerController.java
+        >> MainController.java (Redirect /rooms at this moment)
     >> resources
-        >> css 
-        >> html
+        >> templates 
+            >> customer-form.html
+            >> customer.html
+            >> rooms.html
+            >> reservations.html
+            >> index.html
     >> test
+> HotelManagementApplication.java
+
+
 ```
+Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelManagementApplication.java
+
 
 ## UML 
 Update UML Diagram
