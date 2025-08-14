@@ -63,8 +63,8 @@ Main path : OOP_N02_T3_2_2025_Group2\complete\src\main\java\com\g2\hotelm\HotelM
 
 
 ## UML 
-[Base UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelMUMLbase.svg)
-[Full UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelUMLL.svg)
+[Base UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelMUMLbase.png)
+[Full UML Diagram](OOP_N02_T3_2_2025_Group2\UML and stuffs\HotelUMLL.png)
 
 
 ## Acitivy Diagram 
